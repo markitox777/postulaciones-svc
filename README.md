@@ -130,3 +130,7 @@ El revisor debe:
 
 Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
 
+## Documentación final
+
+Profesor solicita un PR abierto
+
