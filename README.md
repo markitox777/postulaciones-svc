@@ -63,3 +63,12 @@ docker compose up --build
 mvn test      # unit tests + Cucumber
 mvn verify    # + verificación de cobertura JaCoCo (100% LINE, falla si baja)
 ```
+## Modelo de ramificación
+
+Para este proyecto usamos GitFlow de modelo de ramificación. 
+escogimos este modelo ya que logra separar el código de los cambios que se encuentran en desarrollo.
+
+la rama Main tendrá las versiones del microservicio, mientra que la rama Develop se usara para implementar los cambios que haremos como equipo.
+
+Este modelo nos ayuda en el trabajo colaborativo, debido a que cada integrante puede trabajar en una rama totalmente y después pueda integrar los cambios mediantes comandos de Git como Pull, Request, etc. manteniendo un historial de las modificaciones realizadas.
+
