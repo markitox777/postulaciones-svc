@@ -1,0 +1,8 @@
+services:
+  postulaciones-svc:
+    build: .
+    image: duoc/jv0101-caso02-postulaciones:1.0.0
+    container_name: caso02-postulaciones-svc
+    ports:
+      - "${PORT:-8080}:8080"
+    restart: unless-stopped
