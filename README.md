@@ -72,3 +72,61 @@ la rama Main tendrá las versiones del microservicio, mientra que la rama Develo
 
 Este modelo nos ayuda en el trabajo colaborativo, debido a que cada integrante puede trabajar en una rama totalmente y después pueda integrar los cambios mediantes comandos de Git como Pull, Request, etc. manteniendo un historial de las modificaciones realizadas.
 
+## Buenas prácticas del repositorio
+
+### Convención de commits
+
+Se utilizará el formato:
+
+`tipo(alcance): descripcion-corta`
+
+Tipos utilizados:
+
+- `feat`: nueva funcionalidad.
+- `fix`: corrección de errores.
+- `docs`: cambios en documentación.
+- `chore`: tareas de mantenimiento o CI.
+
+Ejemplos:
+
+- `feat(ui): agregar pie de pagina`
+- `fix(ui): corregir titulo de la pagina principal`
+- `docs: agregar changelog`
+- `chore(ci): agregar workflow hola mundo`
+
+Los mensajes se escribirán en minúsculas y serán breves y descriptivos.
+
+### Naming de ramas
+
+Las ramas utilizarán nombres en minúsculas y separados por guiones.
+
+- `feature/<descripcion>` para nuevas funcionalidades.
+- `hotfix/<descripcion>` para correcciones urgentes.
+
+Ejemplos:
+
+- `feature/pagina-presentacion`
+- `feature/changelog`
+- `hotfix/titulo-pagina`
+
+### Flujo de merge
+
+Los cambios realizados mediante ramas `feature/` y `hotfix/` serán integrados mediante Pull Request.
+
+Las features se integrarán hacia `develop` y los hotfix hacia `main`.
+
+Antes de realizar un merge, el Pull Request debe ser revisado por el otro integrante del equipo. Después de integrar una rama temporal, esta podrá ser eliminada.
+
+### Estrategia de revisión
+
+El autor del cambio crea el Pull Request y asigna al otro integrante como revisor.
+
+El revisor debe:
+
+- Revisar los archivos modificados.
+- Verificar que los cambios correspondan al objetivo de la rama.
+- Aprobar el Pull Request o solicitar cambios si encuentra problemas.
+- Evitar fusionar cambios sin revisión previa.
+
+Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
+
