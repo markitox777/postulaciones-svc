@@ -28,6 +28,17 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: Comprobar que existe SONAR_TOKEN
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -n "$SONAR_TOKEN" ]; then
+            echo "SONAR_TOKEN está disponible"
+          else
+            echo "SONAR_TOKEN no está disponible"
+            exit 1
+          fi
+
       - name: Ejecutar pruebas y analizar codigo
         run: >
           mvn -B clean verify
