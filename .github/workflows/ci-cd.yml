@@ -112,7 +112,7 @@ jobs:
   #    (entorno cloud simulado: Docker Compose sobre el runner)
   # ------------------------------------------------------------------
   deploy:
-    name: Desplegar (${{ github.ref_name == 'main' && 'production' || 'staging' }})
+    name: Desplegar
     needs: build-image
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -158,13 +158,18 @@ jobs:
 
       - name: Registrar trazabilidad del despliegue
         if: success()
+        env:
+          ENTORNO: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+          COMMIT_SHA: ${{ github.sha }}
+          IMAGEN: ${{ env.IMAGE }}
+          AUTOR: ${{ github.actor }}
         run: |
           {
             echo "### Despliegue exitoso"
-            echo "- Entorno: \`${{ github.ref_name == 'main' && 'production' || 'staging' }}\`"
-            echo "- Commit: \`${{ github.sha }}\`"
-            echo "- Imagen: \`${{ env.IMAGE }}\`"
-            echo "- Ejecutado por: @${{ github.actor }}"
+            echo "- Entorno: \`$ENTORNO\`"
+            echo "- Commit: \`$COMMIT_SHA\`"
+            echo "- Imagen: \`$IMAGEN\`"
+            echo "- Ejecutado por: @$AUTOR"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Detener contenedores del entorno simulado
