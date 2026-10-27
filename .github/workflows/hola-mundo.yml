@@ -1,26 +1,47 @@
-name: Hola Mundo CI
+
+name: CI - Postulaciones
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, main]
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
-  saludo:
-    name: Saludo de verificacion
+  build-and-analyze:
+    name: Pruebas y SonarQube
     runs-on: ubuntu-latest
 
     steps:
       - name: Descargar codigo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Saludar
-        run: |
-          echo "Hola Mundo desde GitHub Actions"
-          echo "Repositorio: $GITHUB_REPOSITORY"
-          echo "Ref/rama: $GITHUB_REF_NAME"
-          echo "Ejecutado por: $GITHUB_ACTOR"
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: temurin
+          cache: maven
 
-      - name: Mostrar fecha
-        run: date
+      - name: Ejecutar pruebas y analizar codigo
+        run: >
+          mvn -B clean verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.organization=markitox777
+          -Dsonar.projectKey=markitox777_postulaciones-svc
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Construir imagen Docker
+        if: success() && github.event_name == 'push'
+        run: docker build -t postulaciones-svc:${{ github.sha }} .
+
+      - name: Verificar Docker Compose
+        if: success() && github.event_name == 'push'
+        run: docker compose config --quiet
