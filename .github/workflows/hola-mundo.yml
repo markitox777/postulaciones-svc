@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build-and-analyze:
-    name: Pruebas y SonarQube
+    name: Pruebas, SonarQube y Docker
     runs-on: ubuntu-latest
 
     steps:
@@ -49,10 +49,33 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Construir imagen Docker
-        if: success() && github.event_name == 'push'
-        run: docker build -t postulaciones-svc:${{ github.sha }} .
-
-      - name: Verificar Docker Compose
+      - name: Validar Docker Compose
         if: success() && github.event_name == 'push'
         run: docker compose config --quiet
+
+      - name: Construir y desplegar aplicacion
+        if: success() && github.event_name == 'push'
+        run: docker compose up --build -d
+
+      - name: Comprobar respuesta de Swagger
+        if: success() && github.event_name == 'push'
+        run: |
+          for i in $(seq 1 30); do
+            if curl --fail --silent --show-error \
+              http://localhost:8080/swagger-ui/index.html \
+              -o /dev/null; then
+              echo "Despliegue correcto: Swagger responde"
+              exit 0
+            fi
+
+            echo "Esperando que la aplicacion inicie... intento $i de 30"
+            sleep 5
+          done
+
+          echo "Error: la aplicacion no respondio a tiempo"
+          docker compose logs
+          exit 1
+
+      - name: Detener contenedores de prueba
+        if: always() && github.event_name == 'push'
+        run: docker compose down --remove-orphans
