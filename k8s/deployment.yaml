@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postulaciones-svc
+  labels:
+    app: postulaciones-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postulaciones-svc
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: postulaciones-svc
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - name: postulaciones-svc
+          # Reemplazar <owner> y <sha> (el pipeline publica la imagen con el SHA del commit)
+          image: ghcr.io/<owner>/postulaciones-svc:<sha>
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JAVA_OPTS
+              value: "-XX:MaxRAMPercentage=75"
+            - name: H2_CONSOLE_ENABLED
+              value: "false"
+            - name: SHOW_SQL
+              value: "false"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /v3/api-docs
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /v3/api-docs
+              port: 8080
+            initialDelaySeconds: 40
+            periodSeconds: 15
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

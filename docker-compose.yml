@@ -1,8 +1,47 @@
+# Orquestacion con Docker Compose.
+# - Local:      docker compose up --build
+# - Pipeline:   IMAGE=ghcr.io/<owner>/postulaciones-svc:<sha> docker compose up -d --no-build --wait
 services:
   postulaciones-svc:
     build: .
-    image: duoc/jv0101-caso02-postulaciones:1.0.0
-    container_name: caso02-postulaciones-svc
+    # El pipeline inyecta la imagen etiquetada con el SHA del commit (trazabilidad)
+    image: ${IMAGE:-duoc/dy0101-postulaciones-svc:local}
+    container_name: postulaciones-svc
     ports:
       - "${PORT:-8080}:8080"
+    environment:
+      PORT: "8080"
+      JAVA_OPTS: "-XX:MaxRAMPercentage=75"
+      # En un entorno desplegado no se expone la consola H2 ni se loguea el SQL
+      H2_CONSOLE_ENABLED: "${H2_CONSOLE_ENABLED:-false}"
+      SHOW_SQL: "false"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:8080/v3/api-docs"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+      start_period: 40s
+    # --- Escalabilidad: limites de recursos ---
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+    # --- Seguridad del contenedor ---
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - postulaciones-net
+
+networks:
+  postulaciones-net:
+    driver: bridge

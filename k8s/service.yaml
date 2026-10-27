@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postulaciones-svc
+  labels:
+    app: postulaciones-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: postulaciones-svc
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

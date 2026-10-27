@@ -1,26 +1,17 @@
-# Postulaciones — Microservicio de riesgo postulaciones
+# Postulaciones — Microservicio de postulaciones (TalentoYa)
 
-Microservicio correspondiente al **caso caso02 — TalentoYa** (App de busqueda de empleo (trabajadores/freelance)) de la Evaluación Parcial N°1.
+Microservicio del **caso 02 — TalentoYa** (app de búsqueda de empleo). En la Evaluación Parcial N°2 de **DOY0101 — Ingeniería DevOps** se automatiza todo su ciclo de vida con un pipeline CI/CD en GitHub Actions.
 
 | | |
 |---|---|
-| Asignatura | JVY0101 — Java: Diseño y Construcción de Soluciones Nativas en Nube |
 | Stack | Spring Boot 3.3 · Java 21 · Maven · Spring Data JPA · H2 · springdoc-openapi |
-| Calidad | JaCoCo cobertura LINE 100% · Cucumber (BDD) alineado a endpoints REST |
-| Entrega | Docker / Docker Compose |
+| Calidad | JUnit 5 + Mockito · Cucumber (BDD) · JaCoCo (100% de líneas) · SonarCloud |
+| Contenedores | Docker (multi-stage, usuario no root) · Docker Compose · manifiestos Kubernetes |
+| CI/CD | GitHub Actions · GitHub Container Registry (GHCR) · Dependabot |
 
 ## Responsabilidad (SRP)
 
-administra los datos y la lógica del dominio de Postulaciones del caso caso02 (TalentoYa). Su base de datos es una **H2 en memoria** (un solo microservicio por base), cumpliendo aislamiento de datos por dominio.
-
-## Página de presentación
-
-Al ejecutar el servicio, `http://localhost:8080/` muestra la página de presentación del microservicio con documentación y enlaces a:
-
-- **Swagger UI**: `/swagger-ui/index.html`
-- **OpenAPI (yaml)**: `/v3/api-docs.yaml`
-- **ReDoc**: `/redoc.html`
-- **H2 Console**: `/h2-console`
+Administra los datos y la lógica del dominio de Postulaciones. Su base de datos es una **H2 en memoria** (un microservicio por base).
 
 ## Endpoints
 
@@ -32,101 +23,108 @@ Al ejecutar el servicio, `http://localhost:8080/` muestra la página de presenta
 | PUT | `/api/postulaciones/{id}` | Actualiza un recurso |
 | DELETE | `/api/postulaciones/{id}` | Elimina un recurso |
 
+Documentación: Swagger UI `/swagger-ui/index.html`, OpenAPI `/v3/api-docs.yaml`, ReDoc `/redoc.html`.
+
+---
+
+## Pipeline CI/CD
+
+El workflow está en [`.github/workflows/ci-cd.yml`](.github/workflows/ci-cd.yml) y se ejecuta en cada `push` a `develop` y `main`, y en cada Pull Request.
+
+```mermaid
+flowchart LR
+    A[Push / Pull Request] --> B[test-and-analyze<br/>JUnit + Cucumber + JaCoCo<br/>SonarCloud + Quality Gate]
+    B --> C[build-image<br/>Docker build<br/>tag = SHA del commit]
+    C -->|solo push| D[Publicar en GHCR]
+    D --> E{Rama}
+    E -->|develop| F[deploy: staging]
+    E -->|main| G[deploy: production]
+    F --> H[Smoke test + resumen de trazabilidad]
+    G --> H
+```
+
+| Job | Qué hace | Falla si... |
+|-----|----------|-------------|
+| `test-and-analyze` | Ejecuta pruebas unitarias y BDD, mide cobertura con JaCoCo y analiza con SonarCloud | Falla una prueba, la cobertura de líneas baja de 100%, o **el Quality Gate de SonarCloud no pasa** |
+| `build-image` | Construye la imagen con el `Dockerfile` y la publica en GHCR (solo en `push`) | El build de Docker falla |
+| `deploy` | Descarga la imagen del commit, la levanta con Docker Compose en un entorno simulado y hace un smoke test | El contenedor no queda saludable o la app no responde |
+
+Los jobs están encadenados con `needs:`, por lo que **no se construye ni despliega nada si fallan las pruebas o el análisis**.
+
+### Seguridad
+
+- **Dependabot** (`.github/dependabot.yml`) revisa semanalmente dependencias Maven, imágenes Docker y Actions.
+- **SonarCloud** analiza el código; con `sonar.qualitygate.wait=true` el pipeline se bloquea si el Quality Gate falla.
+- La rama `main` debe tener **branch protection** que exija que el check del CI pase antes de hacer merge.
+- Permisos mínimos del workflow (`contents: read`; `packages: write` solo en el job que publica la imagen).
+- Contenedor con usuario no root, sistema de archivos de solo lectura, `cap_drop: ALL` y `no-new-privileges`.
+- En los entornos desplegados la consola H2 y el log de SQL están desactivados (`H2_CONSOLE_ENABLED=false`, `SHOW_SQL=false`).
+
+### Escalabilidad
+
+- Compose: límites y reservas de CPU/memoria, `healthcheck` y `JAVA_OPTS` con `MaxRAMPercentage`.
+- Kubernetes (`k8s/`): 2 réplicas, `RollingUpdate`, probes de readiness/liveness, requests/limits y `HorizontalPodAutoscaler` (2 a 5 pods, 70% CPU).
+
+### Trazabilidad
+
+Cada despliegue se puede rastrear de punta a punta:
+
+1. Commit → ejecución del workflow en la pestaña *Actions*.
+2. La imagen se publica como `ghcr.io/<owner>/postulaciones-svc:<SHA del commit>` y lleva las etiquetas OCI `revision` y `source`.
+3. El job `deploy` despliega **exactamente esa imagen** y escribe en el resumen de la ejecución el entorno, el commit, la imagen y quién lo ejecutó.
+4. Los reportes de pruebas y cobertura quedan como artefactos de cada ejecución.
+5. `develop` se despliega en el entorno `staging` y `main` en `production` (GitHub Environments).
+
+### Calidad
+
+Cobertura mínima de 100% de líneas (JaCoCo, falla en `mvn verify`), pruebas BDD con Cucumber sobre los endpoints reales, Quality Gate de SonarCloud y revisión obligatoria de Pull Requests por el otro integrante.
+
+---
+
+## Cómo ejecutar
+
+```bash
+mvn spring-boot:run                 # local
+mvn verify                          # pruebas + cobertura (falla si baja de 100%)
+docker compose up --build           # Docker Compose (http://localhost:8080)
+H2_CONSOLE_ENABLED=true docker compose up --build   # con consola H2 (solo desarrollo)
+```
+
+### Kubernetes (opcional)
+
+```bash
+# editar la imagen en k8s/deployment.yaml (<owner> y <sha>)
+kubectl apply -f k8s/
+```
+
+## Configuración necesaria en GitHub
+
+- Secret `SONAR_TOKEN` en *Settings → Secrets and variables → Actions* **y también en la pestaña Dependabot** (para que los PR de Dependabot pasen el CI).
+- Branch protection en `main` (y `develop`) exigiendo el check `Pruebas y SonarCloud`.
+- Entornos `staging` y `production` (se crean solos en el primer despliegue; en `production` se pueden exigir revisores).
+- Activar *Dependabot alerts* y *security updates*.
+
 ## Documentación del proyecto
 
-La documentación completa está en la carpeta [`docs/`](docs/):
+- [`docs/00_Resumen.md`](docs/00_Resumen.md) · [`docs/01_Arquitectura.md`](docs/01_Arquitectura.md) · [`docs/02_API.md`](docs/02_API.md) · [`docs/03_Pruebas.md`](docs/03_Pruebas.md) · [`docs/04_Despliegue.md`](docs/04_Despliegue.md) · [`docs/05_Justificacion.md`](docs/05_Justificacion.md) · [`docs/diagramas/`](docs/diagramas/)
 
-- [`docs/00_Resumen.md`](docs/00_Resumen.md) — propósito, responsabilidad y tecnologías
-- [`docs/01_Arquitectura.md`](docs/01_Arquitectura.md) — componentes, arquitectura y patrones
-- [`docs/02_API.md`](docs/02_API.md) — contrato REST y ejemplos curl
-- [`docs/03_Pruebas.md`](docs/03_Pruebas.md) — tests unitarios, cobertura y Cucumber
-- [`docs/04_Despliegue.md`](docs/04_Despliegue.md)
-- [`docs/05_Justificacion.md`](docs/05_Justificacion.md) — justificación del servicio: RF/RNF/seguridad cubiertos, stack y por qué cada tecnología AWS
-- [`docs/diagramas/`](docs/diagramas/) — C4 (contexto, contenedores, componentes), secuencia e infraestructura AWS — Docker, Docker Compose e integración
+## Modelo de ramificación y buenas prácticas
 
-## Cómo ejecutar locmente
+GitFlow: `main` guarda las versiones estables y `develop` integra los cambios del equipo. Ramas `feature/<descripcion>` hacia `develop` y `hotfix/<descripcion>` hacia `main`, siempre por Pull Request revisado por el otro integrante. Commits con formato `tipo(alcance): descripcion-corta` (`feat`, `fix`, `docs`, `chore`).
 
-```bash
-mvn spring-boot:run
-```
+---
 
-## Cómo ejecutar con Docker
+## Declaración de uso de IA
 
-```bash
-docker compose up --build
-# http://localhost:8080
-```
+> **COMPLETAR POR EL EQUIPO** (la evaluación exige declarar y citar el uso de IA: https://bibliotecas.duoc.cl/ia).
+> Indicar qué herramienta se usó, para qué (por ejemplo: apoyo en la redacción de archivos de configuración del pipeline, Dockerfile, Compose y manifiestos) y cómo se validó el resultado.
 
-## Cómo ejecutar las pruebas
+## Conclusiones y reflexiones individuales
 
-```bash
-mvn test      # unit tests + Cucumber
-mvn verify    # + verificación de cobertura JaCoCo (100% LINE, falla si baja)
-```
-## Modelo de ramificación
+> **ESCRIBIR SIN APOYO DE IA** (requisito de la evaluación).
 
-Para este proyecto usamos GitFlow de modelo de ramificación. 
-escogimos este modelo ya que logra separar el código de los cambios que se encuentran en desarrollo.
+### Integrante 1
+_(reflexión personal: aprendizaje y contribución al proyecto)_
 
-la rama Main tendrá las versiones del microservicio, mientra que la rama Develop se usara para implementar los cambios que haremos como equipo.
-
-Este modelo nos ayuda en el trabajo colaborativo, debido a que cada integrante puede trabajar en una rama totalmente y después pueda integrar los cambios mediantes comandos de Git como Pull, Request, etc. manteniendo un historial de las modificaciones realizadas.
-
-## Buenas prácticas del repositorio
-
-### Convención de commits
-
-Se utilizará el formato:
-
-`tipo(alcance): descripcion-corta`
-
-Tipos utilizados:
-
-- `feat`: nueva funcionalidad.
-- `fix`: corrección de errores.
-- `docs`: cambios en documentación.
-- `chore`: tareas de mantenimiento o CI.
-
-Ejemplos:
-
-- `feat(ui): agregar pie de pagina`
-- `fix(ui): corregir titulo de la pagina principal`
-- `docs: agregar changelog`
-- `chore(ci): agregar workflow hola mundo`
-
-Los mensajes se escribirán en minúsculas y serán breves y descriptivos.
-
-### Naming de ramas
-
-Las ramas utilizarán nombres en minúsculas y separados por guiones.
-
-- `feature/<descripcion>` para nuevas funcionalidades.
-- `hotfix/<descripcion>` para correcciones urgentes.
-
-Ejemplos:
-
-- `feature/pagina-presentacion`
-- `feature/changelog`
-- `hotfix/titulo-pagina`
-
-### Flujo de merge
-
-Los cambios realizados mediante ramas `feature/` y `hotfix/` serán integrados mediante Pull Request.
-
-Las features se integrarán hacia `develop` y los hotfix hacia `main`.
-
-Antes de realizar un merge, el Pull Request debe ser revisado por el otro integrante del equipo. Después de integrar una rama temporal, esta podrá ser eliminada.
-
-### Estrategia de revisión
-
-El autor del cambio crea el Pull Request y asigna al otro integrante como revisor.
-
-El revisor debe:
-
-- Revisar los archivos modificados.
-- Verificar que los cambios correspondan al objetivo de la rama.
-- Aprobar el Pull Request o solicitar cambios si encuentra problemas.
-- Evitar fusionar cambios sin revisión previa.
-
-Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
-
+### Integrante 2
+_(reflexión personal: aprendizaje y contribución al proyecto)_
