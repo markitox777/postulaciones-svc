@@ -1,0 +1,172 @@
+name: CI/CD - Postulaciones
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository }}
+
+jobs:
+  # ------------------------------------------------------------------
+  # 1) Integracion continua: pruebas + cobertura + analisis de codigo
+  # ------------------------------------------------------------------
+  test-and-analyze:
+    name: Pruebas y SonarCloud
+    runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: temurin
+          cache: maven
+
+      # Con token: pruebas + JaCoCo + analisis. Si el Quality Gate falla, el job falla (bloqueo).
+      - name: Pruebas, cobertura y analisis SonarCloud
+        if: env.SONAR_TOKEN != ''
+        run: >
+          mvn -B clean verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.organization=markitox777
+          -Dsonar.projectKey=markitox777_postulaciones-svc
+          -Dsonar.qualitygate.wait=true
+
+      # Sin token (PR de forks): solo pruebas y cobertura, y se deja un aviso visible
+      - name: Pruebas y cobertura (sin SonarCloud)
+        if: env.SONAR_TOKEN == ''
+        run: |
+          echo "::warning::SONAR_TOKEN no disponible: se omite el analisis de SonarCloud"
+          mvn -B clean verify
+
+      - name: Guardar reportes de pruebas y cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-calidad-${{ github.sha }}
+          path: |
+            target/site/jacoco/
+            target/surefire-reports/
+            target/cucumber/
+          if-no-files-found: ignore
+
+  # ------------------------------------------------------------------
+  # 2) Construccion de la imagen Docker (etiquetada con el SHA del commit)
+  # ------------------------------------------------------------------
+  build-image:
+    name: Construir imagen Docker
+    needs: test-and-analyze
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login en GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir (y publicar en push) la imagen
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name == 'push' }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ------------------------------------------------------------------
+  # 3) Entrega continua: develop -> staging, main -> production
+  #    (entorno cloud simulado: Docker Compose sobre el runner)
+  # ------------------------------------------------------------------
+  deploy:
+    name: Desplegar (${{ github.ref_name == 'main' && 'production' || 'staging' }})
+    needs: build-image
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    permissions:
+      contents: read
+      packages: read
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Login en GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validar Docker Compose
+        run: docker compose config --quiet
+
+      - name: Desplegar la imagen del commit
+        run: |
+          docker compose pull
+          docker compose up -d --no-build --wait
+
+      - name: Comprobar respuesta de la aplicacion
+        run: |
+          for i in $(seq 1 30); do
+            if curl --fail --silent --show-error \
+              http://localhost:8080/swagger-ui/index.html -o /dev/null; then
+              echo "Despliegue correcto: la aplicacion responde"
+              exit 0
+            fi
+            echo "Esperando que la aplicacion inicie... intento $i de 30"
+            sleep 5
+          done
+          echo "Error: la aplicacion no respondio a tiempo"
+          docker compose logs
+          exit 1
+
+      - name: Registrar trazabilidad del despliegue
+        if: success()
+        run: |
+          {
+            echo "### Despliegue exitoso"
+            echo "- Entorno: \`${{ github.ref_name == 'main' && 'production' || 'staging' }}\`"
+            echo "- Commit: \`${{ github.sha }}\`"
+            echo "- Imagen: \`${{ env.IMAGE }}\`"
+            echo "- Ejecutado por: @${{ github.actor }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Detener contenedores del entorno simulado
+        if: always()
+        run: docker compose down --remove-orphans
