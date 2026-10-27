@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import cl.duoc.jv0101.caso02.postulaciones.dto.PostulacionRequest;
 import cl.duoc.jv0101.caso02.postulaciones.model.Postulacion;
 import cl.duoc.jv0101.caso02.postulaciones.service.PostulacionService;
 
@@ -37,14 +38,14 @@ public class PostulacionController {
     }
 
     @PostMapping
-    public ResponseEntity<Postulacion> crear(@Valid @RequestBody Postulacion recurso) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(recurso));
+    public ResponseEntity<Postulacion> crear(@Valid @RequestBody PostulacionRequest recurso) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(aEntidad(recurso)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Postulacion> actualizar(@PathVariable Long id,
-            @Valid @RequestBody Postulacion datos) {
-        return service.update(id, datos).map(ResponseEntity::ok)
+            @Valid @RequestBody PostulacionRequest datos) {
+        return service.update(id, aEntidad(datos)).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -53,4 +54,13 @@ public class PostulacionController {
         return service.delete(id) ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
     }
+
+    private static Postulacion aEntidad(PostulacionRequest request) {
+        Postulacion postulacion = new Postulacion();
+        postulacion.setNombre(request.nombre());
+        postulacion.setOferta(request.oferta());
+        postulacion.setEstado(request.estado());
+        return postulacion;
+    }
 }
+
