@@ -1,5 +1,10 @@
-target/
-*.class
-.idea/
-.vscode/
-*.iml
+   target/
+   *.class
+   .idea/
+   .vscode/
+   *.iml
+   .git/
+   .github/
+   docs/
+   k8s/
+   *.md
