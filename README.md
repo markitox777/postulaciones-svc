@@ -1,132 +1,110 @@
-# Postulaciones — Microservicio de riesgo postulaciones
+# Documentación DevOps — Postulaciones SVC
 
-Microservicio correspondiente al **caso caso02 — TalentoYa** (App de busqueda de empleo (trabajadores/freelance)) de la Evaluación Parcial N°1.
+## 1. Objetivo
 
-| | |
-|---|---|
-| Asignatura | JVY0101 — Java: Diseño y Construcción de Soluciones Nativas en Nube |
-| Stack | Spring Boot 3.3 · Java 21 · Maven · Spring Data JPA · H2 · springdoc-openapi |
-| Calidad | JaCoCo cobertura LINE 100% · Cucumber (BDD) alineado a endpoints REST |
-| Entrega | Docker / Docker Compose |
+El objetivo de la configuración DevOps es automatizar la compilación, las pruebas, el análisis de calidad y la comprobación del despliegue del microservicio Postulaciones.
 
-## Responsabilidad (SRP)
+Para esto se utilizan GitHub Actions, Maven, SonarCloud, Docker, Docker Compose y Dependabot.
 
-administra los datos y la lógica del dominio de Postulaciones del caso caso02 (TalentoYa). Su base de datos es una **H2 en memoria** (un solo microservicio por base), cumpliendo aislamiento de datos por dominio.
+## 2. Integración continua (CI)
 
-## Página de presentación
+El proyecto utiliza GitHub Actions para ejecutar automáticamente el pipeline cuando se realizan cambios en las ramas `main` y `develop`, y cuando se crean o actualizan Pull Requests dirigidos a `main`.
 
-Al ejecutar el servicio, `http://localhost:8080/` muestra la página de presentación del microservicio con documentación y enlaces a:
+El workflow se encuentra en:
 
-- **Swagger UI**: `/swagger-ui/index.html`
-- **OpenAPI (yaml)**: `/v3/api-docs.yaml`
-- **ReDoc**: `/redoc.html`
-- **H2 Console**: `/h2-console`
+`.github/workflows/hola-mundo.yml`
 
-## Endpoints
+Las principales etapas son:
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| GET | `/api/postulaciones` | Lista todos los recursos |
-| GET | `/api/postulaciones/{id}` | Obtiene un recurso por id |
-| POST | `/api/postulaciones` | Crea un recurso |
-| PUT | `/api/postulaciones/{id}` | Actualiza un recurso |
-| DELETE | `/api/postulaciones/{id}` | Elimina un recurso |
+1. Descargar el código del repositorio.
+2. Configurar Java 21 y Maven.
+3. Comprobar que el secreto `SONAR_TOKEN` esté disponible.
+4. Ejecutar las pruebas y la verificación del proyecto mediante `mvn clean verify`.
+5. Analizar el código con SonarCloud.
+6. Validar la configuración de Docker Compose.
+7. Construir e iniciar temporalmente la aplicación en Docker.
+8. Comprobar que Swagger responda correctamente.
+9. Detener los contenedores utilizados durante la ejecución.
 
-## Documentación del proyecto
+Las etapas de Docker se ejecutan en eventos `push` cuando las etapas anteriores terminan correctamente. En los Pull Requests se ejecutan las pruebas y el análisis, pero no el despliegue temporal.
 
-La documentación completa está en la carpeta [`docs/`](docs/):
+## 3. Pruebas y calidad del código
 
-- [`docs/00_Resumen.md`](docs/00_Resumen.md) — propósito, responsabilidad y tecnologías
-- [`docs/01_Arquitectura.md`](docs/01_Arquitectura.md) — componentes, arquitectura y patrones
-- [`docs/02_API.md`](docs/02_API.md) — contrato REST y ejemplos curl
-- [`docs/03_Pruebas.md`](docs/03_Pruebas.md) — tests unitarios, cobertura y Cucumber
-- [`docs/04_Despliegue.md`](docs/04_Despliegue.md)
-- [`docs/05_Justificacion.md`](docs/05_Justificacion.md) — justificación del servicio: RF/RNF/seguridad cubiertos, stack y por qué cada tecnología AWS
-- [`docs/diagramas/`](docs/diagramas/) — C4 (contexto, contenedores, componentes), secuencia e infraestructura AWS — Docker, Docker Compose e integración
+Maven se utiliza para compilar el proyecto y ejecutar las pruebas automatizadas.
 
-## Cómo ejecutar locmente
+Comandos principales:
 
-```bash
-mvn spring-boot:run
-```
+- `mvn test`: ejecuta las pruebas configuradas.
+- `mvn verify`: ejecuta la verificación del proyecto y las comprobaciones de cobertura configuradas con JaCoCo.
 
-## Cómo ejecutar con Docker
+JaCoCo está configurado con un mínimo de cobertura de líneas del 100 %. Si la cobertura no cumple el umbral configurado, la verificación puede fallar.
 
-```bash
-docker compose up --build
-# http://localhost:8080
-```
+SonarCloud realiza el análisis de calidad del código. Los resultados deben revisarse en el proyecto correspondiente de SonarCloud.
 
-## Cómo ejecutar las pruebas
+## 4. Seguridad y gestión de dependencias
 
-```bash
-mvn test      # unit tests + Cucumber
-mvn verify    # + verificación de cobertura JaCoCo (100% LINE, falla si baja)
-```
-## Modelo de ramificación
+### SonarCloud
 
-Para este proyecto usamos GitFlow de modelo de ramificación. 
-escogimos este modelo ya que logra separar el código de los cambios que se encuentran en desarrollo.
+El análisis se ejecuta desde el pipeline de GitHub Actions.
 
-la rama Main tendrá las versiones del microservicio, mientra que la rama Develop se usara para implementar los cambios que haremos como equipo.
+El token de autenticación se almacena como un secreto del repositorio llamado `SONAR_TOKEN`. Este valor no debe escribirse directamente en el código ni publicarse en la documentación.
 
-Este modelo nos ayuda en el trabajo colaborativo, debido a que cada integrante puede trabajar en una rama totalmente y después pueda integrar los cambios mediantes comandos de Git como Pull, Request, etc. manteniendo un historial de las modificaciones realizadas.
+### Dependabot
 
-## Buenas prácticas del repositorio
+Dependabot está configurado para revisar semanalmente las dependencias de:
 
-### Convención de commits
+- Maven.
+- Docker.
+- GitHub Actions.
 
-Se utilizará el formato:
+Las actualizaciones propuestas se revisan mediante Pull Requests. Antes de fusionarlas, se debe comprobar que las pruebas, el análisis y la construcción de la aplicación continúen funcionando.
 
-`tipo(alcance): descripcion-corta`
+También están habilitadas las alertas de Dependabot y las actualizaciones de seguridad.
 
-Tipos utilizados:
+## 5. Protección de la rama principal
 
-- `feat`: nueva funcionalidad.
-- `fix`: corrección de errores.
-- `docs`: cambios en documentación.
-- `chore`: tareas de mantenimiento o CI.
+El repositorio utiliza un ruleset llamado `Proteccion-main`, dirigido a la rama principal.
 
-Ejemplos:
+La configuración contempla:
 
-- `feat(ui): agregar pie de pagina`
-- `fix(ui): corregir titulo de la pagina principal`
-- `docs: agregar changelog`
-- `chore(ci): agregar workflow hola mundo`
+- Exigir Pull Requests antes de incorporar cambios.
+- Exigir que pase el check obligatorio de GitHub Actions.
+- Evitar los cambios forzados y la eliminación accidental de la rama, si estas restricciones están habilitadas en el ruleset.
 
-Los mensajes se escribirán en minúsculas y serán breves y descriptivos.
+El propósito es reducir el riesgo de incorporar cambios que no hayan superado las comprobaciones automatizadas.
 
-### Naming de ramas
+## 6. Contenedores y despliegue
 
-Las ramas utilizarán nombres en minúsculas y separados por guiones.
+El proyecto utiliza Docker para empaquetar la aplicación y Docker Compose para construirla y ejecutarla.
 
-- `feature/<descripcion>` para nuevas funcionalidades.
-- `hotfix/<descripcion>` para correcciones urgentes.
+Para iniciar el servicio localmente:
 
-Ejemplos:
+`docker compose up --build`
 
-- `feature/pagina-presentacion`
-- `feature/changelog`
-- `hotfix/titulo-pagina`
+La aplicación queda disponible en:
 
-### Flujo de merge
+- Página principal: `http://localhost:8080/`
+- Swagger UI: `http://localhost:8080/swagger-ui/index.html`
+- Documentación OpenAPI: `http://localhost:8080/v3/api-docs.yaml`
 
-Los cambios realizados mediante ramas `feature/` y `hotfix/` serán integrados mediante Pull Request.
+El pipeline realiza una ejecución temporal del contenedor en el runner de GitHub Actions y comprueba la respuesta de Swagger.
 
-Las features se integrarán hacia `develop` y los hotfix hacia `main`.
+Este procedimiento valida la construcción y el inicio de la aplicación, pero no corresponde a un despliegue permanente en un servidor de producción.
 
-Antes de realizar un merge, el Pull Request debe ser revisado por el otro integrante del equipo. Después de integrar una rama temporal, esta podrá ser eliminada.
+## 7. Verificación del pipeline
 
-### Estrategia de revisión
+Una ejecución satisfactoria debe mostrar que las etapas correspondientes finalizaron correctamente.
 
-El autor del cambio crea el Pull Request y asigna al otro integrante como revisor.
+Para revisar los resultados:
 
-El revisor debe:
+1. Abrir la pestaña Actions del repositorio.
+2. Seleccionar la ejecución del workflow CI - Postulaciones.
+3. Revisar el resultado de las pruebas y del análisis de SonarCloud.
+4. En las ejecuciones `push`, revisar también la construcción de Docker, la respuesta de Swagger y la detención de los contenedores.
+5. Revisar el resultado de las comprobaciones en los Pull Requests antes de fusionarlos.
 
-- Revisar los archivos modificados.
-- Verificar que los cambios correspondan al objetivo de la rama.
-- Aprobar el Pull Request o solicitar cambios si encuentra problemas.
-- Evitar fusionar cambios sin revisión previa.
+## 8. Conclusión
 
-Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
+La configuración permite automatizar verificaciones importantes del ciclo de desarrollo, detectar problemas antes de integrar cambios, mantener las dependencias bajo revisión y reducir el riesgo de incorporar modificaciones defectuosas a la rama principal.
 
+El despliegue configurado en GitHub Actions es de prueba y temporal. Para disponer de un despliegue permanente sería necesario configurar un entorno de ejecución externo.
