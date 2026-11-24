@@ -3,9 +3,15 @@ name: CI - Postulaciones
 
 on:
   push:
-    branches: [develop, main]
+    branches:
+      - develop
+      - main
+      - feature/ep3-observabilidad
+
   pull_request:
     branches: [main]
+
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -33,9 +39,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           if [ -n "$SONAR_TOKEN" ]; then
-            echo "SONAR_TOKEN está disponible"
+            echo "SONAR_TOKEN disponible"
           else
-            echo "SONAR_TOKEN no está disponible"
+            echo "SONAR_TOKEN no disponible"
             exit 1
           fi
 
@@ -46,36 +52,80 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.organization=markitox777
           -Dsonar.projectKey=markitox777_postulaciones-svc
+          -Dsonar.qualitygate.wait=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      - name: Generar metricas de cobertura
+        run: python3 scripts/generate_ci_metrics.py
+
+      - name: Publicar informe JaCoCo
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-jacoco
+          path: target/site/jacoco/
+          retention-days: 30
+
       - name: Validar Docker Compose
-        if: success() && github.event_name == 'push'
+        if: success() && github.event_name != 'pull_request'
         run: docker compose config --quiet
 
+      - name: Registrar inicio del despliegue
+        if: success() && github.event_name != 'pull_request'
+        run: echo "DEPLOY_START=$(date +%s)" >> "$GITHUB_ENV"
+
       - name: Construir y desplegar aplicacion
-        if: success() && github.event_name == 'push'
+        if: success() && github.event_name != 'pull_request'
         run: docker compose up --build -d
 
-      - name: Comprobar respuesta de Swagger
-        if: success() && github.event_name == 'push'
+      - name: Comprobar disponibilidad
+        if: success() && github.event_name != 'pull_request'
         run: |
           for i in $(seq 1 30); do
             if curl --fail --silent --show-error \
               http://localhost:8080/swagger-ui/index.html \
+              -o /dev/null &&
+              curl --fail --silent --show-error \
+              http://localhost:8080/actuator/health \
               -o /dev/null; then
-              echo "Despliegue correcto: Swagger responde"
+
+              echo "Despliegue correcto"
               exit 0
             fi
 
-            echo "Esperando que la aplicacion inicie... intento $i de 30"
+            echo "Esperando aplicacion... intento $i de 30"
             sleep 5
           done
 
-          echo "Error: la aplicacion no respondio a tiempo"
+          echo "ERROR: Aplicacion no disponible"
           docker compose logs
           exit 1
 
+      - name: Registrar duracion del despliegue
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          DEPLOY_END=$(date +%s)
+          DURATION=$((DEPLOY_END - DEPLOY_START))
+
+          echo "Duracion del despliegue: $DURATION segundos"
+
+          {
+            echo "# HELP ci_deployment_duration_seconds Duracion del despliegue de prueba"
+            echo "# TYPE ci_deployment_duration_seconds gauge"
+            echo "ci_deployment_duration_seconds $DURATION"
+            echo "# HELP ci_deployment_success Resultado del despliegue"
+            echo "# TYPE ci_deployment_success gauge"
+            echo "ci_deployment_success 1"
+          } >> monitoring/metrics/ci_metrics.prom
+
+      - name: Publicar metricas CI CD
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: metricas-ci-cd
+          path: monitoring/metrics/ci_metrics.prom
+          retention-days: 30
+
       - name: Detener contenedores de prueba
-        if: always() && github.event_name == 'push'
+        if: always() && github.event_name != 'pull_request'
         run: docker compose down --remove-orphans
