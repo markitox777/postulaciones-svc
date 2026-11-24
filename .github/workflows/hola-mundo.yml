@@ -34,27 +34,8 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Comprobar que existe SONAR_TOKEN
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          if [ -n "$SONAR_TOKEN" ]; then
-            echo "SONAR_TOKEN disponible"
-          else
-            echo "SONAR_TOKEN no disponible"
-            exit 1
-          fi
-
-      - name: Ejecutar pruebas y analizar codigo
-        run: >
-          mvn -B clean verify
-          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.organization=markitox777
-          -Dsonar.projectKey=markitox777_postulaciones-svc
-          -Dsonar.qualitygate.wait=true
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Ejecutar pruebas y verificar cobertura
+        run: mvn -B clean verify
 
       - name: Generar metricas de cobertura
         run: python3 scripts/generate_ci_metrics.py
@@ -65,6 +46,30 @@ jobs:
           name: informe-jacoco
           path: target/site/jacoco/
           retention-days: 30
+
+      - name: Comprobar SONAR_TOKEN
+        if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "$SONAR_TOKEN" ]; then
+            echo "ERROR: SONAR_TOKEN no disponible"
+            exit 1
+          fi
+
+          echo "SONAR_TOKEN disponible"
+
+      - name: Analizar codigo y verificar Quality Gate
+        if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+        run: >
+          mvn -B
+          org.sonarsource.scanner.maven:sonar-maven-plugin:5.9.0.7382:sonar
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.organization=markitox777
+          -Dsonar.projectKey=markitox777_postulaciones-svc
+          -Dsonar.qualitygate.wait=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Validar Docker Compose
         if: success() && github.event_name != 'pull_request'
