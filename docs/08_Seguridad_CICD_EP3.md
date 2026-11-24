@@ -96,3 +96,25 @@ Pendiente de completar por el estudiante.
 Completar indicando las herramientas utilizadas,
 las actividades en que fueron empleadas y las
 verificaciones realizadas personalmente.
+
+## 13. Correccion del Quality Gate
+
+SonarCloud detecto tres problemas de seguridad relacionados
+con referencias modificables de acciones externas.
+
+Se fijaron las referencias de Trivy y Setup Minikube
+mediante SHA completos de sus commits.
+
+Commit de correccion: 434b163.
+
+Resultados posteriores:
+
+- Analisis SonarCloud aprobado.
+- Integracion continua aprobada.
+- Auditoria Trivy bloqueada.
+- Despliegue Kubernetes omitido por seguridad.
+
+Evidencias:
+
+- [Comprobaciones finales](evidencias/pull-request-checks-final.txt)
+- [Estado final del PR](evidencias/pull-request-estado-final.json)
