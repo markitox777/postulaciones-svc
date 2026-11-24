@@ -39,7 +39,7 @@ jobs:
             -t duoc/jv0101-caso02-postulaciones:1.0.0 .
 
       - name: Auditar repositorio
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -50,7 +50,7 @@ jobs:
           output: auditoria-repositorio.txt
 
       - name: Auditar imagen Docker
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: image
           image-ref: duoc/jv0101-caso02-postulaciones:1.0.0
@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Iniciar Minikube
-        uses: medyagh/setup-minikube@latest
+        uses: medyagh/setup-minikube@e9e035a86bbc3caea26a450bd4dbf9d0c453682e
         with:
           driver: docker
           cpus: 2
