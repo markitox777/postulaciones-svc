@@ -26,7 +26,7 @@ kubectl create configmap ci-metrics-data \
 
 kubectl create configmap grafana-datasource \
   -n "$NS" \
-  --from-file=monitoring/grafana/provisioning/datasources/prometheus.yml \
+  --from-file=monitoring/grafana/provisioning/datasources/ \
   --dry-run=client -o yaml | kubectl apply -f -
 
 kubectl create configmap grafana-provider \
@@ -56,7 +56,7 @@ echo "=== DESPLEGANDO MONITOREO ==="
 
 kubectl apply -f k8s/monitoring/
 
-for deployment in ci-metrics-exporter prometheus grafana
+for deployment in ci-metrics-exporter prometheus loki alloy grafana
 do
     kubectl rollout status deployment/"$deployment" \
       -n "$NS" --timeout=180s

@@ -136,6 +136,9 @@ jobs:
       - name: Verificar monitoreo Kubernetes
         run: bash scripts/verify_monitoring_k8s.sh
 
+      - name: Verificar centralizacion de logs
+        run: bash scripts/verify_logs_k8s.sh
+
       - name: Obtener evidencias
         if: always()
         run: |

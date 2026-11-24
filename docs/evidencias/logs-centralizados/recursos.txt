@@ -1,0 +1,14 @@
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/alloy-655c5f874b-xq9bg                 1/1     Running   0          8m29s
+pod/ci-metrics-exporter-66cdc5cd6d-4xdzl   1/1     Running   0          23m
+pod/grafana-6b458fd6d8-pt9v4               1/1     Running   0          6m26s
+pod/loki-5b8455f9bc-rjh28                  1/1     Running   0          10m
+pod/postulaciones-svc-6947b798d-wmxlw      1/1     Running   0          28m
+pod/prometheus-796466c44d-vr8j5            1/1     Running   0          22m
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/ci-metrics-exporter   ClusterIP   10.106.67.12     <none>        9100/TCP   23m
+service/grafana               ClusterIP   10.110.85.39     <none>        3000/TCP   22m
+service/loki                  ClusterIP   10.102.167.134   <none>        3100/TCP   10m
+service/postulaciones-svc     ClusterIP   10.108.143.192   <none>        8080/TCP   3h24m
+service/prometheus            ClusterIP   10.107.110.77    <none>        9090/TCP   27m

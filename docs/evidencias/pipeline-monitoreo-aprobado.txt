@@ -1,0 +1,22 @@
+
+✓ feature/ep3-observabilidad Seguridad y Kubernetes markitox777/postulaciones-svc#23 · 45486707674
+Triggered via push about 5 minutes ago
+
+JOBS
+✓ Auditoria de seguridad in 1m51s (ID 138773924171)
+✓ Despliegue Kubernetes in 3m22s (ID 138775081684)
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Auditoria de seguridad: .github#2
+
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Despliegue Kubernetes: .github#3
+
+
+ARTIFACTS
+informes-seguridad
+evidencias-kubernetes
+
+For more information about a job, try: gh run view --job=<job-id>
+View this run on GitHub: https://github.com/markitox777/postulaciones-svc/actions/runs/45486707674
