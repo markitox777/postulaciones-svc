@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-metrics-exporter
+  namespace: postulaciones
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-metrics-exporter
+  template:
+    metadata:
+      labels:
+        app: ci-metrics-exporter
+    spec:
+      containers:
+        - name: node-exporter
+          image: prom/node-exporter:v1.9.1
+          args:
+            - "--collector.disable-defaults"
+            - "--collector.textfile"
+            - "--collector.textfile.directory=/metrics"
+          ports:
+            - containerPort: 9100
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - name: metrics
+              mountPath: /metrics
+              readOnly: true
+      volumes:
+        - name: metrics
+          configMap:
+            name: ci-metrics-data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ci-metrics-exporter
+  namespace: postulaciones
+spec:
+  type: ClusterIP
+  selector:
+    app: ci-metrics-exporter
+  ports:
+    - port: 9100
+      targetPort: 9100
