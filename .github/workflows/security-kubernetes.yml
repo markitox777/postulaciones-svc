@@ -39,20 +39,24 @@ jobs:
             -t duoc/jv0101-caso02-postulaciones:1.0.0 .
 
       - name: Auditar repositorio
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
           trivy-config: security/trivy.yml
+          severity: 'CRITICAL'
+          exit-code: '1'
           format: table
           output: auditoria-repositorio.txt
 
       - name: Auditar imagen Docker
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: image
           image-ref: duoc/jv0101-caso02-postulaciones:1.0.0
           trivy-config: security/trivy.yml
+          severity: 'CRITICAL'
+          exit-code: '1'
           format: table
           output: auditoria-imagen.txt
 
