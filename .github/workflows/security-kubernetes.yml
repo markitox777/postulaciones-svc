@@ -1,0 +1,118 @@
+name: Seguridad y Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/ep3-observabilidad
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    name: Auditoria de seguridad
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Configurar Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Verificar pruebas y cobertura
+        run: mvn -B clean verify
+
+      - name: Construir imagen Docker
+        run: |
+          docker build \
+            -t duoc/jv0101-caso02-postulaciones:1.0.0 .
+
+      - name: Auditar repositorio
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          trivy-config: security/trivy.yml
+          format: table
+          output: auditoria-repositorio.txt
+
+      - name: Auditar imagen Docker
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: image
+          image-ref: duoc/jv0101-caso02-postulaciones:1.0.0
+          trivy-config: security/trivy.yml
+          format: table
+          output: auditoria-imagen.txt
+
+      - name: Publicar informes de seguridad
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informes-seguridad
+          path: auditoria-*.txt
+
+  deploy:
+    name: Despliegue Kubernetes
+    needs: security
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Iniciar Minikube
+        uses: medyagh/setup-minikube@latest
+        with:
+          driver: docker
+          cpus: 2
+          memory: 3072
+
+      - name: Desplegar microservicio
+        run: bash scripts/deploy_k8s.sh
+
+      - name: Verificar disponibilidad
+        run: |
+          kubectl port-forward \
+            -n postulaciones \
+            svc/postulaciones-svc 8080:8080 \
+            > /tmp/port-forward.log 2>&1 &
+
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/actuator/health; then
+              exit 0
+            fi
+            sleep 3
+          done
+
+          exit 1
+
+      - name: Obtener evidencias
+        if: always()
+        run: |
+          mkdir -p evidencias
+          kubectl get all -n postulaciones \
+            > evidencias/recursos.txt || true
+          kubectl get nodes -o wide \
+            > evidencias/nodos.txt || true
+          kubectl logs -n postulaciones \
+            deployment/postulaciones-svc \
+            > evidencias/logs.txt || true
+
+      - name: Publicar evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-kubernetes
+          path: evidencias/
