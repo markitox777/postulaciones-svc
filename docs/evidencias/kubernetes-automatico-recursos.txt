@@ -1,0 +1,12 @@
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/postulaciones-svc-7866d86997-hw7tx   1/1     Running   0          24s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/postulaciones-svc   ClusterIP   10.103.140.220   <none>        8080/TCP   24s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/postulaciones-svc   1/1     1            1           24s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/postulaciones-svc-7495b4b499   0         0         0       24s
+replicaset.apps/postulaciones-svc-7866d86997   1         1         1       24s

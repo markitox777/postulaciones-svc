@@ -167,5 +167,29 @@ Servicios:
 ### Estado de seguridad
 
 La auditoria automatica se encuentra activa.
-Las vulnerabilidades criticas pendientes bloquean
-el despliegue automatizado de Kubernetes.
+
+### Resultados verificados
+
+- Spring Boot 4.0.10.
+- Spring WebMVC 7.0.11.
+- 20 pruebas automatizadas aprobadas.
+- Cobertura JaCoCo del 100%.
+- Cero vulnerabilidades criticas detectadas por Trivy.
+- Auditoria del repositorio e imagen Docker aprobadas.
+- Quality Gate de SonarCloud aprobado.
+- Despliegue automatico Kubernetes exitoso.
+- Siete controles de GitHub aprobados.
+
+Las politicas de seguridad permanecen activas y bloquean
+el despliegue cuando se detectan vulnerabilidades criticas.
+
+El despliegue Kubernetes se realiza en un entorno
+temporal de GitHub Actions mediante Minikube.
+
+### Evidencias finales
+
+- [Pipeline de seguridad](https://github.com/markitox777/postulaciones-svc/actions/runs/45482303285)
+- [Pull Request EP3](https://github.com/markitox777/postulaciones-svc/pull/23)
+- [Auditoria del repositorio](docs/evidencias/auditoria-repositorio-final.txt)
+- [Auditoria de imagen Docker](docs/evidencias/auditoria-imagen-final.txt)
+
