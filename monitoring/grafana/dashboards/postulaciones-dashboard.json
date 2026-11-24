@@ -3,7 +3,7 @@
   "uid": "ep3-postulaciones",
   "title": "EP3 - Monitoreo Postulaciones",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "editable": true,
   "tags": [
     "EP3",
@@ -321,68 +321,32 @@
     },
     {
       "id": 6,
-      "type": "timeseries",
-      "title": "Memoria JVM por área",
+      "title": "Cobertura JaCoCo por categoria",
+      "type": "bargauge",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "x": 12,
         "y": 5,
-        "h": 8,
-        "w": 12
+        "w": 12,
+        "h": 8
       },
+      "pluginVersion": "12.3.0",
       "fieldConfig": {
         "defaults": {
-          "unit": "bytes",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "lineWidth": 1,
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "spanNulls": false,
-            "insertNulls": false,
-            "showPoints": "auto",
-            "showValues": false,
-            "pointSize": 5,
-            "stacking": {
-              "mode": "none",
-              "group": "A"
-            },
-            "axisPlacement": "auto",
-            "axisLabel": "",
-            "axisColorMode": "text",
-            "axisBorderShow": false,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "axisCenteredZero": false,
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
+          "unit": "percent",
+          "decimals": 0,
           "color": {
-            "mode": "palette-classic"
+            "mode": "fixed",
+            "fixedColor": "green"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "value": null,
-                "color": "green"
-              }
-            ]
-          }
+          "min": 0,
+          "max": 100
         },
         "overrides": []
       },
-      "pluginVersion": "12.3.0",
       "targets": [
         {
           "refId": "A",
@@ -391,26 +355,22 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum by (area) (jvm_memory_used_bytes{job=\"postulaciones-svc\"})",
-          "legendFormat": "__auto",
-          "range": true
+          "expr": "ci_test_coverage_percent{job=\"ci-cd-metrics\"}",
+          "instant": true,
+          "range": false,
+          "legendFormat": "{{type}}"
         }
       ],
-      "datasource": {
-        "uid": "prometheus",
-        "type": "prometheus"
-      },
       "options": {
-        "tooltip": {
-          "mode": "single",
-          "sort": "none",
-          "hideZeros": false
-        },
-        "legend": {
-          "showLegend": true,
-          "displayMode": "list",
-          "placement": "bottom",
-          "calcs": []
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true,
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
         }
       }
     },
@@ -636,6 +596,249 @@
         "tooltip": {
           "mode": "multi"
         }
+      }
+    },
+    {
+      "id": 11,
+      "title": "Cobertura de pruebas - Lineas",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 29,
+        "w": 6,
+        "h": 6
+      },
+      "pluginVersion": "12.3.0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 0,
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "green"
+          },
+          "min": 0,
+          "max": 100
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "ci_test_coverage_percent{job=\"ci-cd-metrics\",type=\"line\"}",
+          "instant": true,
+          "range": false,
+          "legendFormat": "__auto"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "showPercentChange": false,
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Duracion del despliegue de prueba",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 29,
+        "w": 6,
+        "h": 6
+      },
+      "pluginVersion": "12.3.0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 0,
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "ci_deployment_duration_seconds{job=\"ci-cd-metrics\"}",
+          "instant": true,
+          "range": false,
+          "legendFormat": "__auto"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "showPercentChange": false,
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 13,
+      "title": "Ultimo despliegue exitoso importado",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 29,
+        "w": 6,
+        "h": 6
+      },
+      "pluginVersion": "12.3.0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "green"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "FALLIDO",
+                  "color": "red",
+                  "index": 0
+                },
+                "1": {
+                  "text": "EXITOSO",
+                  "color": "green",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "ci_deployment_success{job=\"ci-cd-metrics\"}",
+          "instant": true,
+          "range": false,
+          "legendFormat": "__auto"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "showPercentChange": false,
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "id": 14,
+      "title": "Antiguedad de las metricas CI/CD",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 29,
+        "w": 6,
+        "h": 6
+      },
+      "pluginVersion": "12.3.0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 0,
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "orange"
+          }
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "time() - ci_metrics_generated_timestamp_seconds{job=\"ci-cd-metrics\"}",
+          "instant": true,
+          "range": false,
+          "legendFormat": "__auto"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "showPercentChange": false,
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto"
       }
     }
   ]
