@@ -8,3 +8,4 @@ target/
 .env/monitoring/metrics/ci_metrics.prom
 
 /monitoring/metrics/ci_metrics.prom
+/evidencias/

@@ -192,4 +192,3 @@ temporal de GitHub Actions mediante Minikube.
 - [Pull Request EP3](https://github.com/markitox777/postulaciones-svc/pull/23)
 - [Auditoria del repositorio](docs/evidencias/auditoria-repositorio-final.txt)
 - [Auditoria de imagen Docker](docs/evidencias/auditoria-imagen-final.txt)
-

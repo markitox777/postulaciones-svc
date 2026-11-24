@@ -83,6 +83,21 @@ jobs:
           cpus: 2
           memory: 3072
 
+      - name: Configurar Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Generar cobertura para monitoreo
+        run: |
+          mvn -B clean verify
+          python3 scripts/generate_ci_metrics.py
+
+      - name: Registrar inicio del despliegue
+        run: echo "DEPLOY_START=$(date +%s)" >> "$GITHUB_ENV"
+
       - name: Desplegar microservicio
         run: bash scripts/deploy_k8s.sh
 
@@ -101,6 +116,25 @@ jobs:
           done
 
           exit 1
+
+      - name: Registrar metricas del despliegue Kubernetes
+        run: |
+          DURATION=$(($(date +%s) - DEPLOY_START))
+
+          {
+            echo "# HELP ci_deployment_duration_seconds Duracion del despliegue Kubernetes"
+            echo "# TYPE ci_deployment_duration_seconds gauge"
+            echo "ci_deployment_duration_seconds $DURATION"
+            echo "# HELP ci_deployment_success Resultado del despliegue"
+            echo "# TYPE ci_deployment_success gauge"
+            echo "ci_deployment_success 1"
+          } >> monitoring/metrics/ci_metrics.prom
+
+      - name: Desplegar monitoreo Kubernetes
+        run: bash scripts/deploy_monitoring_k8s.sh
+
+      - name: Verificar monitoreo Kubernetes
+        run: bash scripts/verify_monitoring_k8s.sh
 
       - name: Obtener evidencias
         if: always()
