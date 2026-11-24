@@ -1,16 +1,20 @@
+
 spring:
   application:
     name: postulaciones-svc
+
   datasource:
     url: jdbc:h2:mem:postulacionesdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
+
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
     open-in-view: false
+
   h2:
     console:
       enabled: true
@@ -24,3 +28,34 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+# EP3: Monitoreo y observabilidad
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
+    cl.duoc.jv0101: INFO
