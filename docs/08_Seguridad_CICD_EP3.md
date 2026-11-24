@@ -84,8 +84,8 @@ La auditoria de la imagen Docker no ha sido ejecutada
 exitosamente debido al bloqueo previo del repositorio.
 
 El despliegue automatico Kubernetes permanece bloqueado.
-El Quality Gate del Pull Request final esta pendiente
-de validacion.
+El Quality Gate del Pull Request fue aprobado.
+La auditoria de seguridad mantiene bloqueada la fusion.
 
 ## 11. Justificacion y reflexion individual
 
