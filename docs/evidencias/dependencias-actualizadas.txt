@@ -1,0 +1,24 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24613 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] Loaded 64 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO] 
+[INFO] ------------------< cl.duoc.jv0101:postulaciones-svc >------------------
+[INFO] Building Postulaciones | postulaciones 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.8.1:tree (default-cli) @ postulaciones-svc ---
+[INFO] cl.duoc.jv0101:postulaciones-svc:jar:1.0.0
+[INFO] +- org.springframework.boot:spring-boot-starter-web:jar:3.5.16:compile
+[INFO] |  +- org.springframework.boot:spring-boot-starter-tomcat:jar:3.5.16:compile
+[INFO] |  |  +- org.apache.tomcat.embed:tomcat-embed-core:jar:10.1.62:compile
+[INFO] |  |  \- org.apache.tomcat.embed:tomcat-embed-websocket:jar:10.1.62:compile
+[INFO] |  \- org.springframework:spring-webmvc:jar:6.2.19:compile
+[INFO] \- org.springframework.boot:spring-boot-starter-validation:jar:3.5.16:compile
+[INFO]    \- org.apache.tomcat.embed:tomcat-embed-el:jar:10.1.62:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.827 s
+[INFO] Finished at: 2026-11-24T18:12:13Z
+[INFO] ------------------------------------------------------------------------

@@ -130,3 +130,42 @@ El revisor debe:
 
 Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
 
+
+---
+
+## EP3 - DevOps, observabilidad y seguridad
+
+### Componentes implementados
+
+- Monitoreo con Actuator y Micrometer.
+- Prometheus y Grafana.
+- Dashboard de 14 paneles.
+- Integracion de metricas CI/CD.
+- Orquestacion Kubernetes mediante Minikube.
+- Auditoria automatizada con Trivy.
+- Bloqueo automatico ante vulnerabilidades criticas.
+
+### Documentacion EP3
+
+- [Observabilidad](docs/06_Observabilidad_EP3.md)
+- [Kubernetes](docs/07_Kubernetes_EP3.md)
+- [Seguridad y CI/CD](docs/08_Seguridad_CICD_EP3.md)
+- [Evidencias tecnicas](docs/evidencias/)
+
+### Ejecutar monitoreo
+
+    docker compose up --build -d
+
+Servicios:
+
+| Servicio | Puerto |
+|---|---|
+| Microservicio | 8080 |
+| Prometheus | 9090 |
+| Grafana | 3000 |
+
+### Estado de seguridad
+
+La auditoria automatica se encuentra activa.
+Las vulnerabilidades criticas pendientes bloquean
+el despliegue automatizado de Kubernetes.

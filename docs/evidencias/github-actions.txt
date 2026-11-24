@@ -1,0 +1,6 @@
+completed	success	feat: automatizar auditoria de seguridad y despliegue Kubernetes	CI - Postulaciones	feature/ep3-observabilidad	push	45454300185	1m53s	2026-11-24T17:57:52Z
+completed	failure	feat: automatizar auditoria de seguridad y despliegue Kubernetes	Seguridad y Kubernetes	feature/ep3-observabilidad	push	45454300160	5s	2026-11-24T17:57:52Z
+completed	success	feat: implementar despliegue orquestado con Kubernetes	CI - Postulaciones	feature/ep3-observabilidad	push	45454127983	1m37s	2026-11-24T17:56:53Z
+completed	success	feat: integrar metricas CI/CD con Prometheus y Grafana	CI - Postulaciones	feature/ep3-observabilidad	push	45451503304	2m5s	2026-11-24T17:42:23Z
+completed	success	fix: adaptar pipeline CI/CD al plan gratuito de SonarCloud	CI - Postulaciones	feature/ep3-observabilidad	push	45447867460	2m22s	2026-11-24T17:22:34Z
+completed	failure	feat: integrar metricas CI/CD, cobertura JaCoCo y Quality Gate	CI - Postulaciones	feature/ep3-observabilidad	push	45445736392	1m20s	2026-11-24T17:11:17Z

@@ -1,0 +1,36 @@
+
+X feature/ep3-observabilidad Seguridad y Kubernetes · 45456902563
+Triggered via push about 2 minutes ago
+
+JOBS
+X Auditoria de seguridad in 1m38s (ID 138672614351)
+  ✓ Set up job
+  ✓ Descargar codigo
+  ✓ Configurar Java
+  ✓ Verificar pruebas y cobertura
+  ✓ Construir imagen Docker
+  X Auditar repositorio
+  - Auditar imagen Docker
+  ✓ Publicar informes de seguridad
+  ✓ Post Auditar repositorio
+  ✓ Post Configurar Java
+  ✓ Post Descargar codigo
+  ✓ Complete job
+- Despliegue Kubernetes in 0s (ID 138673691220)
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Auditoria de seguridad: .github#2
+
+X Process completed with exit code 1.
+Auditoria de seguridad: .github#244
+
+! org.springframework.boot.test.mock.mockito.MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+Auditoria de seguridad: src/test/java/cl/duoc/jv0101/caso02/postulaciones/PostulacionControllerTest.java#36
+
+
+ARTIFACTS
+informes-seguridad
+
+To see what failed, try: gh run view 45456902563 --log-failed
+View this run on GitHub: https://github.com/markitox777/postulaciones-svc/actions/runs/45456902563
