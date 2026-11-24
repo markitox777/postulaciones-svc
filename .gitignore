@@ -6,3 +6,5 @@ target/
 .vscode/
 .DS_Store
 .env/monitoring/metrics/ci_metrics.prom
+
+/monitoring/metrics/ci_metrics.prom
