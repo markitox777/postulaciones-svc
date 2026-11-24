@@ -1,0 +1,7 @@
+/actuator/health: HTTP 200
+/actuator/health/liveness: HTTP 200
+/actuator/health/readiness: HTTP 200
+/actuator/metrics: HTTP 200
+/actuator/prometheus: HTTP 200
+/swagger-ui/index.html: HTTP 200
+/v3/api-docs: HTTP 200
