@@ -1,0 +1,35 @@
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/alloy-8d7c6c8c-8p44s                  1/1     Running   0          113s
+pod/ci-metrics-exporter-89d845f67-fkrcd   1/1     Running   0          113s
+pod/grafana-64d75dfdc9-78sn5              1/1     Running   0          113s
+pod/loki-76b6768cc8-hwpd5                 1/1     Running   0          113s
+pod/postulaciones-svc-885ff7864-dhhxz     1/1     Running   0          2m23s
+pod/prometheus-86c645544-5ngc7            1/1     Running   0          113s
+pod/tempo-6b99d58f8d-8fxk6                1/1     Running   0          113s
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+service/ci-metrics-exporter   ClusterIP   10.107.230.191   <none>        9100/TCP                     113s
+service/grafana               ClusterIP   10.99.112.68     <none>        3000/TCP                     113s
+service/loki                  ClusterIP   10.98.82.71      <none>        3100/TCP                     113s
+service/postulaciones-svc     ClusterIP   10.104.161.172   <none>        8080/TCP                     2m23s
+service/prometheus            ClusterIP   10.105.166.82    <none>        9090/TCP                     113s
+service/tempo                 ClusterIP   10.101.6.29      <none>        3200/TCP,4317/TCP,4318/TCP   113s
+
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/alloy                 1/1     1            1           113s
+deployment.apps/ci-metrics-exporter   1/1     1            1           113s
+deployment.apps/grafana               1/1     1            1           113s
+deployment.apps/loki                  1/1     1            1           113s
+deployment.apps/postulaciones-svc     1/1     1            1           2m23s
+deployment.apps/prometheus            1/1     1            1           113s
+deployment.apps/tempo                 1/1     1            1           113s
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/alloy-8d7c6c8c                  1         1         1       113s
+replicaset.apps/ci-metrics-exporter-89d845f67   1         1         1       113s
+replicaset.apps/grafana-64d75dfdc9              1         1         1       113s
+replicaset.apps/loki-76b6768cc8                 1         1         1       113s
+replicaset.apps/postulaciones-svc-754d45fbfc    0         0         0       2m23s
+replicaset.apps/postulaciones-svc-885ff7864     1         1         1       2m23s
+replicaset.apps/prometheus-86c645544            1         1         1       113s
+replicaset.apps/tempo-6b99d58f8d                1         1         1       113s

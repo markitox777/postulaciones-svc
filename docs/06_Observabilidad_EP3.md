@@ -14,6 +14,10 @@ del microservicio postulaciones-svc.
 - Node Exporter.
 - JaCoCo.
 - GitHub Actions.
+- Grafana Loki.
+- Grafana Alloy.
+- OpenTelemetry.
+- Grafana Tempo.
 
 ## 3. Arquitectura de monitoreo
 
@@ -69,11 +73,57 @@ exitosas cada 60 segundos mientras el script esta activo.
 
 ## 8. Limitaciones
 
-El monitoreo fue validado mediante Docker Compose.
-No se ha validado el monitoreo integrado del cluster Kubernetes.
-La sincronizacion requiere un entorno activo y acceso a GitHub.
-Los eventos de registro son metricas agregadas, no logs centralizados.
+El monitoreo fue validado mediante Docker Compose y Kubernetes.
+La sincronizacion externa requiere un entorno activo y acceso a GitHub.
+Los logs centralizados y las trazas fueron verificados en Kubernetes.
+El almacenamiento del cluster es temporal y no productivo.
 
 ## 9. Justificacion tecnica y toma de decisiones
 
 Pendiente de completar por el estudiante.
+
+
+## 10. Centralizacion de logs
+
+Grafana Alloy recopila los registros del microservicio
+desde Kubernetes y los envia a Grafana Loki.
+
+Los registros pueden consultarse mediante Grafana Explore
+y filtrarse por aplicacion y nivel de registro.
+
+Evidencia:
+
+- [Logs centralizados](evidencias/final/kubernetes/loki-logs.json)
+
+## 11. Trazabilidad
+
+OpenTelemetry instrumenta el microservicio y exporta
+las trazas mediante OTLP hacia Grafana Tempo 3.1.1.
+
+La verificacion automatizada recupero 20 trazas
+en la ejecucion final del Pull Request.
+
+Evidencias:
+
+- [Trazas recuperadas](evidencias/final/kubernetes/tempo-trazas.json)
+- [Detalle de una traza](evidencias/final/kubernetes/tempo-detalle-traza.json)
+
+## 12. Resultados finales de observabilidad
+
+| Indicador | Resultado |
+|---|---|
+| Cobertura de lineas | 100% |
+| Duracion del despliegue del microservicio | 45 segundos |
+| Pods disponibles | 7 de 7 |
+| Reinicios observados | 0 |
+| Trazas recuperadas | 20 |
+| Centralizacion de logs | Aprobada |
+| Verificacion de monitoreo | Aprobada |
+
+Ejecucion de referencia: 45518995718.
+
+- [Cobertura](evidencias/final/kubernetes/cobertura.json)
+- [Duracion](evidencias/final/kubernetes/duracion-despliegue.json)
+- [Prometheus](evidencias/final/kubernetes/prometheus-up.json)
+- [Grafana](evidencias/final/kubernetes/grafana-health.json)
+- [Pipeline aprobado](evidencias/final/pipeline-aprobado.txt)

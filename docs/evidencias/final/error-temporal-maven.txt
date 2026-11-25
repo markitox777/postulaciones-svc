@@ -1,0 +1,192 @@
+Auditoria de seguridad	Construir imagen Docker	﻿2026-11-25T00:34:10.0464294Z ##[group]Run docker build \
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0464555Z ^[[36;1mdocker build \^[[0m
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0464794Z ^[[36;1m  -t duoc/jv0101-caso02-postulaciones:1.0.0 .^[[0m
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0482456Z shell: /usr/bin/bash -e {0}
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0482664Z env:
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0482909Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0483289Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0483577Z   MAVEN_ARGS: -ntp
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:10.0483746Z ##[endgroup]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9513840Z #0 building with "default" instance using docker driver
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514145Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514268Z #1 [internal] load build definition from Dockerfile
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514530Z #1 transferring dockerfile: 362B done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514734Z #1 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514831Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:17.9514987Z #2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.1608345Z #2 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.1608531Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.1608736Z #3 [auth] docker/dockerfile:pull token for registry-1.docker.io
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.1609009Z #3 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.3112463Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.3113066Z #2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.6150412Z #2 DONE 0.8s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.7780698Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.7782684Z #4 docker-image://docker.io/docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.7783393Z #4 resolve docker.io/docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183 done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.7808331Z #4 sha256:03f648a05b5780c2a0e4b43c93eb1838c6b9b32131b25f4199f42a788d106315 12.58MB / 15.19MB 0.2s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.9397954Z #4 sha256:03f648a05b5780c2a0e4b43c93eb1838c6b9b32131b25f4199f42a788d106315 15.19MB / 15.19MB 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.9398641Z #4 extracting sha256:03f648a05b5780c2a0e4b43c93eb1838c6b9b32131b25f4199f42a788d106315 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:18.9399251Z #4 DONE 0.3s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.1534118Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.1534615Z #5 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-21
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3448599Z #5 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3448859Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3449233Z #6 [auth] library/maven:pull token for registry-1.docker.io
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3449579Z #6 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3449678Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3449844Z #7 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.3450115Z #7 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.4951093Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.4951831Z #8 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.7865456Z #8 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.7865739Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.7866032Z #5 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-21
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.7866421Z #5 DONE 0.8s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8958410Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8958955Z #8 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8959619Z #8 DONE 0.8s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8959754Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8959868Z #9 [internal] load .dockerignore
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8960356Z #9 transferring context: 78B done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:19.8960634Z #9 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0216409Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0217298Z #10 [internal] load build context
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0217709Z #10 transferring context: 35.30kB done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0218025Z #10 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0218336Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0219281Z #11 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0220258Z #11 resolve docker.io/library/eclipse-temurin:21-jre@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d 0.0s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.0220907Z #11 sha256:d9135916154f20dbd8d50c8e554188f80275ffa954abee6aca394db4a1015bc5 2.46kB / 2.46kB 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.1722802Z #11 sha256:76721611b88652592d1caeca7a310f79e8de96fea5406aabb75f3fb46c6a3f15 159B / 159B 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.1724281Z #11 sha256:3207819a70b07cdbd757426078528dbd3602328738fe4d3132694ab95ab8716f 0B / 53.23MB 0.2s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.1725629Z #11 sha256:41197c198435d8a20a29e734257e67292ebe00353dbae3124adccd20b6c8fcbf 0B / 26.44MB 0.2s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.1726445Z #11 sha256:96aae9022e0e1b310a415e7c2ff1b435d853e8eabb2711cc70f4ad4010cc81b7 389B / 389B 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.3293491Z #11 sha256:3207819a70b07cdbd757426078528dbd3602328738fe4d3132694ab95ab8716f 19.92MB / 53.23MB 0.3s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.3294288Z #11 sha256:41197c198435d8a20a29e734257e67292ebe00353dbae3124adccd20b6c8fcbf 10.49MB / 26.44MB 0.3s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.3294913Z #11 sha256:517b871c26eac1b24d47992388bcc20e2afba3643a89e8c4a3921bfa5e1d1d28 5.24MB / 42.17MB 0.2s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.4810955Z #11 sha256:3207819a70b07cdbd757426078528dbd3602328738fe4d3132694ab95ab8716f 53.23MB / 53.23MB 0.5s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.4812210Z #11 sha256:41197c198435d8a20a29e734257e67292ebe00353dbae3124adccd20b6c8fcbf 26.44MB / 26.44MB 0.4s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.4813445Z #11 sha256:517b871c26eac1b24d47992388bcc20e2afba3643a89e8c4a3921bfa5e1d1d28 42.17MB / 42.17MB 0.3s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:20.4815614Z #11 extracting sha256:517b871c26eac1b24d47992388bcc20e2afba3643a89e8c4a3921bfa5e1d1d28
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.4066275Z #11 extracting sha256:517b871c26eac1b24d47992388bcc20e2afba3643a89e8c4a3921bfa5e1d1d28 1.0s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.4067031Z #11 extracting sha256:96aae9022e0e1b310a415e7c2ff1b435d853e8eabb2711cc70f4ad4010cc81b7
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5412446Z #11 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5412731Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5413277Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5414264Z #12 resolve docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320 0.0s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5415033Z #12 sha256:405aa165b3ac61a5d93c2398a95cdd881401cceda86849dde23f6293310b70c0 154B / 154B 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5415781Z #12 sha256:a466b9e11010eac13b4d1ac50894b683c5fbc95be50dc4dedcdec9c979f98f96 851B / 851B 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5416492Z #12 sha256:bd0bb49686d38ffc090c15f30d472cdb0354fb8cf46c03f21f4f2764d4e4efcd 24.96MB / 24.96MB 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5417195Z #12 sha256:1bf7f7b7d02f74fa2a38d4325c84dcaf0e91faae8e30f221d86c841b0c4f6647 9.36MB / 9.36MB 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5417844Z #12 sha256:49cf9009e0af3adc96baebc58dcde451a6858961e0c027ba7f7ba3075e7240ba 2.46kB / 2.46kB 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5418523Z #12 sha256:f1408710f65cf2f33054c8d5b33ab1f5684c9ffcfc81bc01e550faec04fa9d0b 157B / 157B 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5419365Z #12 sha256:edd1ed89f0d443580bd42e5a10cd8736aba5a3438b2a0645c2ebb50119bb0eba 29.76MB / 29.76MB 0.3s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5420022Z #12 sha256:c5b9275bc0db751e2d75dfe63b7fe841f35111d72e930782de032d5d13d45ab1 22.95MB / 22.95MB 0.2s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5420685Z #12 sha256:07bad0cccfa15aac629986ee3771c057c7690f9ce635dda839f652e54c911318 158.12MB / 158.12MB 0.7s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5421345Z #12 extracting sha256:edd1ed89f0d443580bd42e5a10cd8736aba5a3438b2a0645c2ebb50119bb0eba 0.7s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5422063Z #12 DONE 1.6s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5422186Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5422571Z #11 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5423293Z #11 extracting sha256:96aae9022e0e1b310a415e7c2ff1b435d853e8eabb2711cc70f4ad4010cc81b7 done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.5423873Z #11 extracting sha256:41197c198435d8a20a29e734257e67292ebe00353dbae3124adccd20b6c8fcbf
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.8916146Z #11 extracting sha256:41197c198435d8a20a29e734257e67292ebe00353dbae3124adccd20b6c8fcbf 0.5s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.8918061Z #11 DONE 2.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.8918367Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.8918887Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:21.8920061Z #12 extracting sha256:c5b9275bc0db751e2d75dfe63b7fe841f35111d72e930782de032d5d13d45ab1
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.1092287Z #12 extracting sha256:c5b9275bc0db751e2d75dfe63b7fe841f35111d72e930782de032d5d13d45ab1 0.4s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.1094806Z #12 extracting sha256:07bad0cccfa15aac629986ee3771c057c7690f9ce635dda839f652e54c911318
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.5532885Z #12 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.5533651Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.5534328Z #11 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.5535155Z #11 extracting sha256:3207819a70b07cdbd757426078528dbd3602328738fe4d3132694ab95ab8716f 0.7s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.5535501Z #11 DONE 2.7s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7132832Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7134043Z #11 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:d77e090ae1f6970c047b443c6f0a6c1358b0426d44432bb5a7753408cd43de0d
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7134841Z #11 extracting sha256:76721611b88652592d1caeca7a310f79e8de96fea5406aabb75f3fb46c6a3f15 done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7135420Z #11 extracting sha256:d9135916154f20dbd8d50c8e554188f80275ffa954abee6aca394db4a1015bc5 done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7135846Z #11 DONE 2.7s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7135968Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:22.7136066Z #13 [stage-1 2/3] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.2503126Z #13 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.2503868Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.2504630Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.2505271Z #12 extracting sha256:07bad0cccfa15aac629986ee3771c057c7690f9ce635dda839f652e54c911318 1.3s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.2505641Z #12 DONE 3.4s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4861702Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4863171Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4863930Z #12 extracting sha256:f1408710f65cf2f33054c8d5b33ab1f5684c9ffcfc81bc01e550faec04fa9d0b 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4864488Z #12 extracting sha256:49cf9009e0af3adc96baebc58dcde451a6858961e0c027ba7f7ba3075e7240ba 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4864880Z #12 DONE 3.6s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4864981Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.4865063Z #13 [stage-1 2/3] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.9636123Z #13 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.9636405Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.9636979Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.9637800Z #12 extracting sha256:bd0bb49686d38ffc090c15f30d472cdb0354fb8cf46c03f21f4f2764d4e4efcd 0.5s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:23.9638280Z #12 DONE 4.1s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1107305Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1108171Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1108889Z #12 extracting sha256:1bf7f7b7d02f74fa2a38d4325c84dcaf0e91faae8e30f221d86c841b0c4f6647 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1109540Z #12 DONE 4.2s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1109650Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.1109734Z #13 [stage-1 2/3] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2774528Z #13 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2774767Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2775466Z #12 [build 1/6] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:99e61abcff91a9b1333463bd8451fb18495d6eba9250ac66a338b518f8278320
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2776250Z #12 extracting sha256:a466b9e11010eac13b4d1ac50894b683c5fbc95be50dc4dedcdec9c979f98f96 0.0s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2776758Z #12 extracting sha256:405aa165b3ac61a5d93c2398a95cdd881401cceda86849dde23f6293310b70c0 0.1s done
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.2777122Z #12 DONE 4.4s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.4320411Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:24.4320952Z #14 [build 2/6] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.1276457Z #14 ...
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.1276689Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.2780720Z #13 [stage-1 2/3] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.2781056Z #13 DONE 2.6s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.2781163Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.2781246Z #14 [build 2/6] WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.6751880Z #14 DONE 1.4s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.8337238Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.8337983Z #15 [build 3/6] COPY pom.xml ./
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.8338603Z #15 DONE 0.0s
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.8338871Z
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:25.8339287Z #16 [build 4/6] RUN mvn -B -q dependency:go-offline
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.1596130Z #16 31.48 [ERROR] [ERROR] Some problems were encountered while processing the POMs:
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.1601463Z #16 31.48 [FATAL] Non-resolvable parent POM for cl.duoc.jv0101:postulaciones-svc:1.0.0: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at no local POM @ line 7, column 13
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.1606490Z #16 31.48  @
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2096553Z #16 31.48 [ERROR] The build could not read 1 project -> [Help 1]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2096993Z #16 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2097313Z #16 31.48 [ERROR]   The project cl.duoc.jv0101:postulaciones-svc:1.0.0 (/app/pom.xml) has 1 error
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2099420Z #16 31.48 [ERROR]     Non-resolvable parent POM for cl.duoc.jv0101:postulaciones-svc:1.0.0: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at no local POM @ line 7, column 13 -> [Help 2]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2101227Z #16 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2101589Z #16 31.48 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2102095Z #16 31.48 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2102469Z #16 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2102876Z #16 31.48 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2103565Z #16 31.48 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2104180Z #16 31.48 [ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2104838Z #16 ERROR: process "/bin/sh -c mvn -B -q dependency:go-offline" did not complete successfully: exit code: 1
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2105272Z ------
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2105580Z  > [build 4/6] RUN mvn -B -q dependency:go-offline:
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2105897Z 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2106264Z 31.48 [ERROR]   The project cl.duoc.jv0101:postulaciones-svc:1.0.0 (/app/pom.xml) has 1 error
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2107802Z 31.48 [ERROR]     Non-resolvable parent POM for cl.duoc.jv0101:postulaciones-svc:1.0.0: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:4.0.10 from/to central (https://repo.maven.apache.org/maven2): status code: 429, reason phrase: Too Many Requests (429) and 'parent.relativePath' points at no local POM @ line 7, column 13 -> [Help 2]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2109936Z 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2110272Z 31.48 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2110759Z 31.48 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2111110Z 31.48 [ERROR]
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2111551Z 31.48 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2112180Z 31.48 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2112754Z 31.48 [ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2113262Z ------
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2113462Z Dockerfile:5
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2113653Z --------------------
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2113903Z    3 |     WORKDIR /app
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2114117Z    4 |     COPY pom.xml ./
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2114361Z    5 | >>> RUN mvn -B -q dependency:go-offline
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2114628Z    6 |     COPY src ./src
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2114864Z    7 |     RUN mvn -B -q package -DskipTests
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2115114Z --------------------
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2115579Z ERROR: failed to build: failed to solve: process "/bin/sh -c mvn -B -q dependency:go-offline" did not complete successfully: exit code: 1
+Auditoria de seguridad	Construir imagen Docker	2026-11-25T00:34:57.2161964Z ##[error]Process completed with exit code 1.

@@ -106,3 +106,64 @@ Evidencias:
 
 El cluster se ejecuta temporalmente en GitHub Actions.
 No corresponde a un entorno productivo permanente.
+
+
+## 12. Arquitectura final desplegada
+
+| Componente | Funcion |
+|---|---|
+| postulaciones-svc | Microservicio Spring Boot |
+| Prometheus | Recopilacion de metricas |
+| Grafana | Visualizacion y consultas |
+| Node Exporter | Exposicion de metricas CI/CD |
+| Loki | Almacenamiento de logs |
+| Alloy | Recopilacion de logs |
+| Tempo | Almacenamiento y consulta de trazas |
+
+## 13. Despliegue de imagen auditada
+
+El pipeline construye y audita la imagen del microservicio.
+
+Tras aprobar las auditorias, la imagen se exporta
+como artefacto y se genera una suma SHA-256.
+
+El trabajo de despliegue descarga el artefacto,
+comprueba su integridad y carga la imagen en Docker.
+
+Minikube utiliza la imagen auditada sin reconstruirla.
+
+## 14. Automatizacion de observabilidad
+
+Scripts implementados:
+
+- scripts/deploy_k8s.sh
+- scripts/deploy_monitoring_k8s.sh
+- scripts/sync_ci_metrics_k8s.sh
+- scripts/verify_monitoring_k8s.sh
+- scripts/verify_logs_k8s.sh
+- scripts/verify_traces_k8s.sh
+
+El pipeline verifica disponibilidad, metricas,
+centralizacion de logs y trazabilidad.
+
+## 15. Validacion final
+
+Ejecucion GitHub Actions: 45518995718.
+
+- Siete pods en estado Running.
+- Siete deployments disponibles.
+- Cero reinicios observados.
+- Despliegue del microservicio: 45 segundos.
+- Trabajo completo de despliegue: 4 minutos y 29 segundos.
+- Verificaciones automaticas aprobadas.
+
+Evidencias:
+
+- [Recursos](evidencias/final/kubernetes/recursos.txt)
+- [Nodos](evidencias/final/kubernetes/nodos.txt)
+- [Logs](evidencias/final/kubernetes/logs.txt)
+- [Pipeline](evidencias/final/pipeline-aprobado.txt)
+
+El entorno corresponde a un cluster temporal de pruebas
+en GitHub Actions. No constituye un despliegue productivo
+persistente ni garantiza alta disponibilidad.

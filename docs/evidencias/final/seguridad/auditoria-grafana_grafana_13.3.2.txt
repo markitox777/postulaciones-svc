@@ -1,0 +1,62 @@
+
+Report Summary
+
+┌──────────────────────────────────────────────────────────────────────────────────┬──────────┬─────────────────┐
+│                                      Target                                      │   Type   │ Vulnerabilities │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ grafana/grafana:13.3.2 (alpine 3.24.4)                                           │  alpine  │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/azuremonitor/package.json        │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/grafana-testdata-datasource/pac- │ node-pkg │        0        │
+│ kage.json                                                                        │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/graphite/package.json            │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/bin/grafana                                                    │ gobinary │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/cloudwatch/gpx_grafana_cloudwatch_dataso- │ gobinary │        0        │
+│ urce_linux_amd64                                                                 │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/elasticsearch/gpx_grafana_elasticsearch_- │ gobinary │        0        │
+│ datasource_linux_amd64                                                           │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/grafana-postgresql-datasource/gpx_grafan- │ gobinary │        0        │
+│ a_postgresql_datasource_linux_amd64                                              │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/grafana-pyroscope-datasource/gpx_grafana- │ gobinary │        0        │
+│ -pyroscope-datasource_linux_amd64                                                │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/influxdb/gpx_grafana_influxdb_datasource- │ gobinary │        0        │
+│ _linux_amd64                                                                     │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/jaeger/gpx_grafana-jaeger-datasource_lin- │ gobinary │        0        │
+│ ux_amd64                                                                         │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/loki/gpx_grafana-loki-datasource_linux_a- │ gobinary │        0        │
+│ md64                                                                             │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/mssql/gpx_grafana-mssql-datasource_linux- │ gobinary │        0        │
+│ _amd64                                                                           │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/mysql/gpx_grafana-mysql-datasource_linux- │ gobinary │        0        │
+│ _amd64                                                                           │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/opentsdb/gpx_grafana-opentsdb-datasource- │ gobinary │        0        │
+│ _linux_amd64                                                                     │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/prometheus/gpx_grafana-prometheus-dataso- │ gobinary │        0        │
+│ urce_linux_amd64                                                                 │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/stackdriver/gpx_grafana_cloudmonitoring_- │ gobinary │        0        │
+│ datasource_linux_amd64                                                           │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/tempo/gpx_grafana-tempo-datasource_linux- │ gobinary │        0        │
+│ _amd64                                                                           │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/data/plugins-bundled/zipkin/gpx_grafana-zipkin-datasource_lin- │ gobinary │        0        │
+│ ux_amd64                                                                         │          │                 │
+└──────────────────────────────────────────────────────────────────────────────────┴──────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)

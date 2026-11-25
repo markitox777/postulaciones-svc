@@ -1,0 +1,13 @@
+
+Report Summary
+
+┌────────────────┬──────────┬─────────────────┐
+│     Target     │   Type   │ Vulnerabilities │
+├────────────────┼──────────┼─────────────────┤
+│ bin/prometheus │ gobinary │        0        │
+├────────────────┼──────────┼─────────────────┤
+│ bin/promtool   │ gobinary │        0        │
+└────────────────┴──────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)

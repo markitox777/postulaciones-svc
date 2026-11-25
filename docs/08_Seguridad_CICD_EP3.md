@@ -80,12 +80,14 @@ antes de fusionarse mediante Pull Request.
 
 ## 10. Limitaciones
 
-La auditoria de la imagen Docker no ha sido ejecutada
-exitosamente debido al bloqueo previo del repositorio.
+La auditoria del repositorio, la imagen Docker y las seis
+imagenes de monitoreo fue ejecutada exitosamente.
+El alcance bloqueante corresponde a severidad CRITICAL.
 
 El despliegue automatico Kubernetes fue aprobado.
 El Quality Gate del Pull Request fue aprobado.
-La auditoria de seguridad fue aprobada y el Pull Request quedo habilitado para fusion.
+La auditoria de seguridad fue aprobada en ejecuciones anteriores.
+El estado actual del Pull Request debe comprobarse antes de fusionar.
 
 ## 11. Justificacion y reflexion individual
 
@@ -163,3 +165,74 @@ La auditoria acredita cero vulnerabilidades dentro del
 alcance CRITICAL configurado. No garantiza la ausencia
 de vulnerabilidades de otras severidades ni acredita
 el analisis de secretos.
+
+
+## 15. Auditoria de componentes de monitoreo
+
+La ampliacion de la auditoria detecto 20 hallazgos
+criticos en las imagenes de monitoreo.
+
+El pipeline bloqueo automaticamente el despliegue.
+
+Se actualizaron las siguientes imagenes:
+
+| Componente | Version anterior | Version final |
+|---|---|---|
+| Alloy | 1.9.2 | 1.22.0 |
+| Grafana | 12.3.0 | 13.3.2 |
+| Loki | 3.5.0 | 3.7.10 |
+| Tempo | 2.8.2 | 3.1.1 |
+| Node Exporter | 1.9.1 | 1.13.1 |
+| Prometheus | 3.5.0 | 3.16.0 |
+
+La configuracion de Tempo fue migrada para mantener
+compatibilidad con la nueva version.
+
+La auditoria posterior fue aprobada sin hallazgos
+criticos bloqueantes reportados.
+
+- [Auditorias anteriores](evidencias/seguridad-monitoreo/antes/)
+- [Evidencia de bloqueo](evidencias/seguridad-monitoreo/bloqueo.txt)
+- [Auditorias finales](evidencias/final/seguridad/)
+
+## 16. Integridad de la imagen desplegada
+
+La imagen auditada del microservicio se transfiere
+entre trabajos de GitHub Actions mediante un artefacto.
+
+La integridad del archivo se comprueba mediante SHA-256
+antes de cargarlo y desplegarlo en Kubernetes.
+
+Las imagenes de monitoreo se auditan por sus etiquetas
+de version, que no constituyen referencias inmutables.
+
+## 17. Incidencia externa de Maven Central
+
+La ejecucion 45518988992 fallo durante la construccion
+Docker debido a una respuesta HTTP 429 de Maven Central.
+
+La ejecucion del Pull Request 45518995718 completo
+correctamente todas las etapas de seguridad y despliegue.
+
+El fallo HTTP 429 no corresponde a una vulnerabilidad
+detectada ni a un fallo de las pruebas automatizadas.
+
+- [Registro del error](evidencias/final/error-temporal-maven.txt)
+- [Pipeline aprobado](evidencias/final/pipeline-aprobado.txt)
+
+## 18. Alcance de la validacion final
+
+- Auditoria del repositorio aprobada.
+- Auditoria de imagen del microservicio aprobada.
+- Auditoria de seis imagenes de monitoreo aprobada.
+- Verificacion SHA-256 aprobada.
+- Despliegue automatico aprobado.
+- Verificaciones de metricas, logs y trazas aprobadas.
+
+La auditoria no garantiza ausencia de vulnerabilidades
+de otras severidades ni acredita por si sola una
+verificacion completa de secretos.
+
+El trabajo de despliegue depende de la auditoria de
+seguridad. SonarCloud se ejecuta en un workflow separado
+y participa en los controles requeridos para fusionar.

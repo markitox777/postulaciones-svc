@@ -141,6 +141,9 @@ Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto fu
 - Prometheus y Grafana.
 - Dashboard de 14 paneles.
 - Integracion de metricas CI/CD.
+- Centralizacion de logs mediante Loki y Alloy.
+- Trazabilidad mediante OpenTelemetry y Tempo.
+- Transferencia de imagen auditada con SHA-256.
 - Orquestacion Kubernetes mediante Minikube.
 - Auditoria automatizada con Trivy.
 - Bloqueo automatico ante vulnerabilidades criticas.
@@ -178,7 +181,10 @@ La auditoria automatica se encuentra activa.
 - Auditoria del repositorio e imagen Docker aprobadas.
 - Quality Gate de SonarCloud aprobado.
 - Despliegue automatico Kubernetes exitoso.
-- Siete controles de GitHub aprobados.
+- Siete pods operativos sin reinicios observados.
+- 45 segundos de despliegue del microservicio.
+- 20 trazas recuperadas.
+- Auditoria de las seis imagenes de monitoreo aprobada.
 
 Las politicas de seguridad permanecen activas y bloquean
 el despliegue cuando se detectan vulnerabilidades criticas.
@@ -188,7 +194,24 @@ temporal de GitHub Actions mediante Minikube.
 
 ### Evidencias finales
 
-- [Pipeline de seguridad](https://github.com/markitox777/postulaciones-svc/actions/runs/45482303285)
+- [Pipeline de seguridad](https://github.com/markitox777/postulaciones-svc/actions/runs/45518995718)
 - [Pull Request EP3](https://github.com/markitox777/postulaciones-svc/pull/23)
-- [Auditoria del repositorio](docs/evidencias/auditoria-repositorio-final.txt)
-- [Auditoria de imagen Docker](docs/evidencias/auditoria-imagen-final.txt)
+- [Auditoria del repositorio](docs/evidencias/final/seguridad/auditoria-repositorio.txt)
+- [Auditoria de imagen Docker](docs/evidencias/final/seguridad/auditoria-imagen.txt)
+
+
+### Evidencias de observabilidad y Kubernetes
+
+- [Evidencias finales](docs/evidencias/final/)
+- [Recursos Kubernetes](docs/evidencias/final/kubernetes/recursos.txt)
+- [Cobertura](docs/evidencias/final/kubernetes/cobertura.json)
+- [Duracion del despliegue](docs/evidencias/final/kubernetes/duracion-despliegue.json)
+- [Logs centralizados](docs/evidencias/final/kubernetes/loki-logs.json)
+- [Trazabilidad](docs/evidencias/final/kubernetes/tempo-trazas.json)
+- [Auditorias de seguridad](docs/evidencias/final/seguridad/)
+
+La validacion integral corresponde a la ejecucion
+45518995718 del Pull Request 23.
+
+Los resultados de seguridad corresponden al alcance
+CRITICAL configurado en Trivy.

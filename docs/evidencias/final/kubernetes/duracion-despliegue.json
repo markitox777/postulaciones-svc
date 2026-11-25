@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {
+          "__name__": "ci_deployment_duration_seconds",
+          "instance": "ci-metrics-exporter:9100",
+          "job": "ci-cd-metrics"
+        },
+        "value": [
+          1795567184.697,
+          "45"
+        ]
+      }
+    ]
+  }
+}

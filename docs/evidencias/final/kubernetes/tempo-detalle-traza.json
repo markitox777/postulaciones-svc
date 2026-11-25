@@ -1,0 +1,91 @@
+{
+  "batches": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "telemetry.sdk.language",
+            "value": {
+              "stringValue": "java"
+            }
+          },
+          {
+            "key": "telemetry.sdk.name",
+            "value": {
+              "stringValue": "opentelemetry"
+            }
+          },
+          {
+            "key": "telemetry.sdk.version",
+            "value": {
+              "stringValue": "1.55.0"
+            }
+          },
+          {
+            "key": "service.name",
+            "value": {
+              "stringValue": "postulaciones-svc"
+            }
+          }
+        ]
+      },
+      "scopeSpans": [
+        {
+          "scope": {
+            "name": "org.springframework.boot",
+            "version": "4.0.10"
+          },
+          "spans": [
+            {
+              "traceId": "WCr+oue69NE2dqgwHcLNgg==",
+              "spanId": "MT9RyuB3lKI=",
+              "name": "http get /actuator/health/**",
+              "kind": "SPAN_KIND_SERVER",
+              "startTimeUnixNano": "1795567199253990176",
+              "endTimeUnixNano": "1795567199256934132",
+              "attributes": [
+                {
+                  "key": "exception",
+                  "value": {
+                    "stringValue": "none"
+                  }
+                },
+                {
+                  "key": "method",
+                  "value": {
+                    "stringValue": "GET"
+                  }
+                },
+                {
+                  "key": "outcome",
+                  "value": {
+                    "stringValue": "SUCCESS"
+                  }
+                },
+                {
+                  "key": "status",
+                  "value": {
+                    "stringValue": "200"
+                  }
+                },
+                {
+                  "key": "uri",
+                  "value": {
+                    "stringValue": "/actuator/health/**"
+                  }
+                },
+                {
+                  "key": "http.url",
+                  "value": {
+                    "stringValue": "/actuator/health/readiness"
+                  }
+                }
+              ],
+              "status": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
