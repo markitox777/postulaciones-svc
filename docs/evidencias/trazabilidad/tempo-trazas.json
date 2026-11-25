@@ -1,0 +1,659 @@
+{
+  "traces": [
+    {
+      "traceID": "8027be66975edd898d2378e70ae485c9",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/prometheus",
+      "startTimeUnixNano": "1795565385840505419",
+      "durationMs": 10,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "a18ebe61ab498217",
+            "startTimeUnixNano": "1795565385840505419",
+            "durationNanos": "10232624",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "a18ebe61ab498217",
+              "startTimeUnixNano": "1795565385840505419",
+              "durationNanos": "10232624",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "c6411a3f283406cb87e327c33c460734",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565382909086820",
+      "durationMs": 3,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "47ee5e0486cb0814",
+            "startTimeUnixNano": "1795565382909086820",
+            "durationNanos": "3174075",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "47ee5e0486cb0814",
+              "startTimeUnixNano": "1795565382909086820",
+              "durationNanos": "3174075",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "2fb20e73515ea80f18c4c8d6bfe2ee03",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565377909612904",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "0fa1c0a38d5e7d1a",
+            "startTimeUnixNano": "1795565377909612904",
+            "durationNanos": "2685206",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "0fa1c0a38d5e7d1a",
+              "startTimeUnixNano": "1795565377909612904",
+              "durationNanos": "2685206",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "e946bf8822aaf075fd3054b737439a3b",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565377371700194",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "f379e3556b38f451",
+            "startTimeUnixNano": "1795565377371700194",
+            "durationNanos": "2662974",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "f379e3556b38f451",
+              "startTimeUnixNano": "1795565377371700194",
+              "durationNanos": "2662974",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "361e05873123e093c1a4ff3e8c03f4e6",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565372909216834",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "04ff29d80b269585",
+            "startTimeUnixNano": "1795565372909216834",
+            "durationNanos": "2894529",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "04ff29d80b269585",
+              "startTimeUnixNano": "1795565372909216834",
+              "durationNanos": "2894529",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "dbe7d1a063db977cb2c12f70b96c8e57",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/prometheus",
+      "startTimeUnixNano": "1795565370839481537",
+      "durationMs": 8,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "d410d6fbbe56b9a0",
+            "startTimeUnixNano": "1795565370839481537",
+            "durationNanos": "8823914",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "d410d6fbbe56b9a0",
+              "startTimeUnixNano": "1795565370839481537",
+              "durationNanos": "8823914",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "b9cd2b8c0e5ad6bc6015ce495440a236",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565367908884935",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "fb0374dc9185f0f5",
+            "startTimeUnixNano": "1795565367908884935",
+            "durationNanos": "2784112",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "fb0374dc9185f0f5",
+              "startTimeUnixNano": "1795565367908884935",
+              "durationNanos": "2784112",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "b1b809239b0cdfeaf0d9e2258118754d",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565367372679516",
+      "durationMs": 3,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "089cbba768110b39",
+            "startTimeUnixNano": "1795565367372679516",
+            "durationNanos": "3783356",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "089cbba768110b39",
+              "startTimeUnixNano": "1795565367372679516",
+              "durationNanos": "3783356",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "178b04780196cff20356d290cdd622e7",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565362909295024",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "373157df11cb47ef",
+            "startTimeUnixNano": "1795565362909295024",
+            "durationNanos": "2590911",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "373157df11cb47ef",
+              "startTimeUnixNano": "1795565362909295024",
+              "durationNanos": "2590911",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "bd48d92550872b7a8315e49104ab5993",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565357908857903",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "b7ab96b1dff7af25",
+            "startTimeUnixNano": "1795565357908857903",
+            "durationNanos": "2586874",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "b7ab96b1dff7af25",
+              "startTimeUnixNano": "1795565357908857903",
+              "durationNanos": "2586874",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "b50591c02cec4bf78604eee2d416a5b2",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565357371627358",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "d81c8baac0fad1ce",
+            "startTimeUnixNano": "1795565357371627358",
+            "durationNanos": "2905172",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "d81c8baac0fad1ce",
+              "startTimeUnixNano": "1795565357371627358",
+              "durationNanos": "2905172",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "d5fed427f8b5623c02cd21989c22b2ec",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/prometheus",
+      "startTimeUnixNano": "1795565355838792465",
+      "durationMs": 19,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "c244ebdd783cf4b3",
+            "startTimeUnixNano": "1795565355838792465",
+            "durationNanos": "19803132",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "c244ebdd783cf4b3",
+              "startTimeUnixNano": "1795565355838792465",
+              "durationNanos": "19803132",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    },
+    {
+      "traceID": "f73d549205cfd9b848e4aa02807c7ddc",
+      "rootServiceName": "postulaciones-svc",
+      "rootTraceName": "http get /actuator/health/**",
+      "startTimeUnixNano": "1795565352909421418",
+      "durationMs": 2,
+      "spanSet": {
+        "spans": [
+          {
+            "spanID": "b9fb2eb417f5845e",
+            "startTimeUnixNano": "1795565352909421418",
+            "durationNanos": "2996766",
+            "attributes": [
+              {
+                "key": "service.name",
+                "value": {
+                  "stringValue": "postulaciones-svc"
+                }
+              }
+            ]
+          }
+        ],
+        "matched": 1
+      },
+      "spanSets": [
+        {
+          "spans": [
+            {
+              "spanID": "b9fb2eb417f5845e",
+              "startTimeUnixNano": "1795565352909421418",
+              "durationNanos": "2996766",
+              "attributes": [
+                {
+                  "key": "service.name",
+                  "value": {
+                    "stringValue": "postulaciones-svc"
+                  }
+                }
+              ]
+            }
+          ],
+          "matched": 1
+        }
+      ],
+      "serviceStats": {
+        "postulaciones-svc": {
+          "spanCount": 1
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "inspectedBytes": "56626",
+    "completedJobs": 1,
+    "totalJobs": 1
+  }
+}

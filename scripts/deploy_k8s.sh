@@ -7,8 +7,13 @@ IMAGE="duoc/jv0101-caso02-postulaciones:1.0.0"
 
 START=$(date +%s)
 
-echo "=== CONSTRUYENDO IMAGEN ==="
-docker build -t "$IMAGE" .
+if [[ "${1:-}" == "--use-audited-image" ]]; then
+    echo "=== UTILIZANDO IMAGEN AUDITADA ==="
+    docker image inspect "$IMAGE" > /dev/null
+else
+    echo "=== CONSTRUYENDO IMAGEN ==="
+    docker build -t "$IMAGE" .
+fi
 
 echo "=== CARGANDO IMAGEN EN KUBERNETES ==="
 minikube image load "$IMAGE" --overwrite=true

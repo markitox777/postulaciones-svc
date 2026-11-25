@@ -60,6 +60,36 @@ jobs:
           format: table
           output: auditoria-imagen.txt
 
+      - name: Auditar imagenes de monitoreo
+        run: |
+          set -euo pipefail
+          RESULT=0
+
+          while IFS= read -r IMAGE; do
+            NAME=$(echo "$IMAGE" | tr '/:' '__')
+            echo "Auditando $IMAGE"
+
+            trivy image               --scanners vuln               --severity CRITICAL               --exit-code 1               --format table               --output "auditoria-${NAME}.txt"               "$IMAGE" || RESULT=1
+
+          done < <(awk '$1 == "image:" {print $2}' k8s/monitoring/*.yml | sort -u)
+
+          exit "$RESULT"
+
+      - name: Guardar imagen auditada
+        run: |
+          mkdir -p imagen-auditada
+          docker save duoc/jv0101-caso02-postulaciones:1.0.0 | gzip > imagen-auditada/imagen.tar.gz
+          cd imagen-auditada
+          sha256sum imagen.tar.gz > imagen.sha256
+
+      - name: Transferir imagen auditada
+        uses: actions/upload-artifact@v4
+        with:
+          name: imagen-auditada
+          path: imagen-auditada/
+          retention-days: 1
+          compression-level: 0
+
       - name: Publicar informes de seguridad
         if: always()
         uses: actions/upload-artifact@v4
@@ -98,8 +128,20 @@ jobs:
       - name: Registrar inicio del despliegue
         run: echo "DEPLOY_START=$(date +%s)" >> "$GITHUB_ENV"
 
+      - name: Descargar imagen auditada
+        uses: actions/download-artifact@v4
+        with:
+          name: imagen-auditada
+          path: imagen-auditada/
+
+      - name: Verificar integridad de imagen
+        run: |
+          cd imagen-auditada
+          sha256sum -c imagen.sha256
+          gunzip -c imagen.tar.gz | docker load
+
       - name: Desplegar microservicio
-        run: bash scripts/deploy_k8s.sh
+        run: bash scripts/deploy_k8s.sh --use-audited-image
 
       - name: Verificar disponibilidad
         run: |
