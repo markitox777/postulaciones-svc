@@ -80,8 +80,11 @@ El almacenamiento del cluster es temporal y no productivo.
 
 ## 9. Justificacion tecnica y toma de decisiones
 
-Pendiente de completar por el estudiante.
+Bueno nosotros decidimos usar Prometheus ya que nos permite recopilar y almacenar automáticamente las métricas del microservicio, mientras que Grafana permite visualizar esta información mediante gráficos y dashboards. Ambas herramientas son de código abierto y compatibles con Docker, Kubernetes y Spring Boot Actuator. En el proyecto se implementaron 14 paneles para visualizar el estado del microservicio y los resultados del pipeline CI/CD.
+Encontramos util monitorear la CPU, Memoria y disponibilidad ya que estos indicadores nos permite conocer el rendimiento y estado del microservicio. El consumo de CPU permite detectar una posible sobrecarga, mientras que el uso de memoria ayuda a identificar un consumo excesivo de recursos. La disponibilidad permite comprobar si el microservicio está funcionando correctamente y puede responder a las solicitudes de los usuarios.
 
+Nosotros nos ayudamos de Loki porque nos permite centralizar y consultar los registros del microservicio, facilitando la identificación de errores y advertencias sin tener que revisar individualmente cada contenedor. Tempo permite consultar las trazas de las solicitudes mediante OpenTelemetry, conocer su duración e identificar posibles problemas durante su procesamiento. En el proyecto se verificó la centralización de logs y se recuperaron 20 trazas.
+Las métricas nos permiten identificar problemas y evaluar posibles mejoras basándose en datos reales. Por ejemplo, un consumo elevado de memoria podría indicar la necesidad de revisar el código o ajustar los recursos asignados. Un aumento de errores HTTP podría requerir investigar los registros y las trazas. Asimismo, la cobertura de pruebas y el tiempo de despliegue permiten evaluar la calidad del código y la eficiencia del pipeline CI/CD.
 
 ## 10. Centralizacion de logs
 

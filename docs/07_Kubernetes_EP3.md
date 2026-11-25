@@ -80,7 +80,31 @@ no a un servicio Kubernetes administrado y persistente.
 
 ## 10. Justificacion tecnica
 
-Pendiente de completar por el estudiante.
+1. ¿Por qué utilizar Kubernetes y Minikube?
+
+R: Porque los kubernetes nos permiten administrar y orquestar contenedores, controlar los recursos asignados, comprobar la disponibilidad de los servicios y recuperar automáticamente los contenedores que presentan fallos.
+Minikube nos permite ejecutar un clúster de Kubernetes en un entorno de pruebas sin contratar un servicio administrado como AWS EKS, Azure AKS o Google GKE. 
+En el proyecto se utilizaron GitHub Codespaces y GitHub Actions para ejecutar este entorno de producción simulada.
+2. ¿Cómo se comprobó la recuperación automática?
+R: Durante las pruebas eliminamos manualmente un pod del microservicio de postulaciones. Kubernetes detectó que no se cumplía la cantidad de réplicas definida en el Deployment y creó automáticamente un nuevo pod.
+El nuevo pod quedó operativo en aproximadamente 26 segundos. Posteriormente, se comprobó la disponibilidad del microservicio mediante Spring Boot Actuator.
+Esta prueba nos demuestra la capacidad de recuperación automática, aunque no garantiza disponibilidad continua, porque el microservicio tiene una sola réplica.
+3. ¿Qué ventajas tiene automatizar el despliegue mediante GitHub Actions?
+R: GitHub Actions nos permite ejecutar automáticamente las pruebas, auditorías de seguridad y despliegues, reduciendo las intervenciones manuales y facilitando la reproducibilidad del proceso.
+En nuestro proyecto, el pipeline realiza las siguientes operaciones:
+- Ejecuta las pruebas automatizadas y verifica la cobertura.
+- Analiza las imágenes mediante Trivy.
+- Comprueba la integridad de la imagen auditada mediante SHA-256.
+- Despliega el microservicio y las herramientas de observabilidad en Kubernetes.
+- Verifica la disponibilidad, las métricas, los logs y las trazas.
+- Genera evidencias de los resultados obtenidos.
+Si la auditoría detecta vulnerabilidades críticas, el despliegue se bloquea automáticamente.
+4. ¿Qué limitaciones tiene utilizar un entorno temporal?
+R: Minikube dentro de GitHub Actions nos permitio simular un entorno de producción, pero presenta limitaciones frente a un clúster permanente en la nube.
+Los recursos de CPU, memoria y almacenamiento son limitados. Además, el entorno se elimina cuando termina la ejecución del pipeline, por lo que no existe monitoreo continuo después de ese momento.
+El proyecto tampoco cuenta con almacenamiento persistente ni múltiples réplicas del microservicio para garantizar alta disponibilidad.
+
+Como mejoras futuras, consideramos servicios administrados de Kubernetes, almacenamiento persistente, escalamiento automático y múltiples réplicas.
 
 ## 11. Validacion del despliegue automatico
 

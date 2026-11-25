@@ -91,13 +91,37 @@ El estado actual del Pull Request debe comprobarse antes de fusionar.
 
 ## 11. Justificacion y reflexion individual
 
-Pendiente de completar por el estudiante.
+1. ¿Por qué utilizar SonarCloud y Trivy?
+R: SonarCloud nos permite analizar automáticamente la calidad del código fuente, identificando problemas de seguridad, mantenibilidad y fiabilidad. Su Quality Gate permite comprobar si el código cumple las condiciones de calidad establecidas.
+Por otra parte, Trivy nos permite detectar vulnerabilidades conocidas en las dependencias del proyecto y las imágenes Docker. Ambas herramientas se complementan, ya que SonarCloud analiza principalmente el código fuente y Trivy permite identificar riesgos asociados a los componentes y dependencias utilizados por la aplicación.
+2. ¿Qué problema real de seguridad se detectó y cómo se solucionó?
+R: Durante las primeras ejecuciones del pipeline, Trivy detectó nueve hallazgos críticos relacionados con las dependencias de Spring Boot y Tomcat.
+Inicialmente, se actualizó Spring Boot a la versión 3.5.16, reduciendo los hallazgos críticos de nueve a dos. Posteriormente, se realizó una migración a Spring Boot 4.0.10, adaptando las dependencias y las pruebas automatizadas.
+También se detectaron 20 hallazgos críticos acumulados en las imágenes de las herramientas de monitoreo, por lo que se actualizaron sus versiones.
+Después de realizar estas modificaciones, las auditorías críticas finalizaron correctamente, las 20 pruebas automatizadas fueron aprobadas y se mantuvo el 100% de cobertura de líneas.
+3. ¿Por qué implementar políticas de cumplimiento automatizadas?
+R: Las políticas automatizadas nos permiten establecer condiciones obligatorias que deben cumplirse antes de aprobar cambios o desplegar el microservicio.
+En el proyecto se utilizamos SonarCloud para controlar la calidad del código, Trivy para detectar vulnerabilidades críticas, JaCoCo para verificar la cobertura de pruebas y Dependabot para detectar actualizaciones disponibles.
+Además, se configuraron reglas de protección sobre la rama main, evitando que los cambios sean fusionados mientras existan controles obligatorios fallidos.
+También se incorporó una verificación mediante SHA-256 para comprobar la integridad del archivo que contiene la imagen Docker auditada antes de desplegarla.
+4. ¿Qué sucede cuando se detecta una falla crítica?
+R: Cuando Trivy detecta una vulnerabilidad crítica, devuelve un código de salida de error, provocando que GitHub Actions marque la auditoría como fallida y detenga el despliegue dependiente de esa auditoría.
+Esta situación ocurrió durante el desarrollo, cuando las vulnerabilidades detectadas impidieron continuar con el despliegue de Kubernetes.
+Una vez corregidos los problemas y ejecutadas nuevamente las verificaciones, los siete controles del Pull Request finalizaron exitosamente, permitiendo que quedara habilitado para su fusión.
+5. ¿Qué limitaciones tiene la seguridad implementada?
+R: La política actual de Trivy bloquea vulnerabilidades de severidad crítica, pero esto nos garantiza que el sistema esté completamente libre de vulnerabilidades de otras severidades.
+Como posibles mejoras futuras podriamos incorporar auditorías de configuraciones de Kubernetes, análisis dinámico de seguridad, políticas de bloqueo para vulnerabilidades altas y fijación de imágenes mediante sus identificadores digest.
+Estas mejoras son propuestas, no funcionalidades que hayamos verificado como implementadas.
 
 ## 12. Declaracion de uso de inteligencia artificial
 
-Completar indicando las herramientas utilizadas,
-las actividades en que fueron empleadas y las
-verificaciones realizadas personalmente.
+Durante el desarrollo del proyecto se utilizó ChatGPT, herramienta de inteligencia artificial desarrollada por OpenAI, como apoyo para comprender conceptos técnicos, generar código, configurar herramientas de observabilidad, elaborar archivos YAML, desarrollar scripts de automatización, configurar pipelines CI/CD, resolver errores y estructurar la documentación técnica.
+
+Los resultados fueron comprobados mediante ejecuciones de pruebas automatizadas, auditorías de seguridad, consultas de métricas, revisión de registros y validaciones realizadas en GitHub Actions y Kubernetes.
+
+**Referencia:**
+
+OpenAI. (2026). ChatGPT [Modelo de lenguaje de inteligencia artificial]. https://chatgpt.com/
 
 ## 13. Correccion del Quality Gate
 
