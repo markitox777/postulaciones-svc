@@ -23,6 +23,12 @@ spec:
             - name: http
               containerPort: 8080
           env:
+            - name: MANAGEMENT_OPENTELEMETRY_TRACING_EXPORT_OTLP_ENDPOINT
+              value: "http://tempo:4318/v1/traces"
+            - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
+              value: "1.0"
+            - name: MANAGEMENT_TRACING_EXPORT_OTLP_ENABLED
+              value: "true"
             - name: PORT
               value: "8080"
             - name: SPRING_H2_CONSOLE_ENABLED

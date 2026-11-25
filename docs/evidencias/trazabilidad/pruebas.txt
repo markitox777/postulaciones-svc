@@ -1,0 +1,212 @@
+[INFO] Scanning for projects...
+[INFO] Loaded 24613 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO]
+[INFO] ------------------< cl.duoc.jv0101:postulaciones-svc >------------------
+[INFO] Building Postulaciones | postulaciones 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Loaded 64 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+[INFO]
+[INFO] --- clean:3.5.0:clean (default-clean) @ postulaciones-svc ---
+[INFO] Deleting /workspaces/postulaciones-svc/target
+[INFO]
+[INFO] --- jacoco:0.8.12:prepare-agent (prepare-agent) @ postulaciones-svc ---
+[INFO] argLine set to -javaagent:/home/codespace/.m2/repository/org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar=destfile=/workspaces/postulaciones-svc/target/jacoco.exec,excludes=**/*Application.class
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ postulaciones-svc ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO]
+[INFO] --- compiler:3.14.1:compile (default-compile) @ postulaciones-svc ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 6 source files with javac [debug parameters release 21] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ postulaciones-svc ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO]
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ postulaciones-svc ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug parameters release 21] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.6.1:test (default-test) @ postulaciones-svc ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running cl.duoc.jv0101.caso02.postulaciones.OpenApiConfigTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.266 s -- in cl.duoc.jv0101.caso02.postulaciones.OpenApiConfigTest
+[INFO] Running cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest
+23:50:46.932 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest]: PostulacionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:50:47.345 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest
+23:50:47.698 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest]: PostulacionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:50:47.704 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v4.0.10)
+
+2026-11-24T23:50:49.364Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.PostulacionControllerTest      : Starting PostulacionControllerTest using Java 21.0.13.1 with PID 6907 (started by codespace in /workspaces/postulaciones-svc)
+2026-11-24T23:50:49.370Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.PostulacionControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2026-11-24T23:50:53.392Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-24T23:50:53.630Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 145 ms. Found 1 JPA repository interface.
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/home/codespace/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2026-11-24T23:50:59.382Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-24T23:50:59.846Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.25.Final
+2026-11-24T23:51:01.690Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-24T23:51:01.889Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-24T23:51:03.031Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:postulacionesdb user=SA
+2026-11-24T23:51:03.043Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-24T23:51:03.510Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:postulacionesdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: POSTULACIONESDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-24T23:51:05.847Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists postulaciones cascade
+Hibernate: create table postulaciones (id bigint generated by default as identity, estado varchar(255), nombre varchar(255) not null, oferta varchar(255), primary key (id))
+2026-11-24T23:51:05.942Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-24T23:51:06.519Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page: class path resource [static/index.html]
+2026-11-24T23:51:08.007Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] i.m.c.instrument.push.PushMeterRegistry  : Publishing metrics for OtlpMeterRegistry every 1m to http://localhost:4318/v1/metrics with resource attributes {service.name=postulaciones-svc}
+2026-11-24T23:51:08.838Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-24T23:51:09.576Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-24T23:51:09.577Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-24T23:51:09.588Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
+2026-11-24T23:51:09.610Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 31 ms
+2026-11-24T23:51:09.787Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.PostulacionControllerTest      : Started PostulacionControllerTest in 21.845 seconds (process running for 27.372)
+2026-11-24T23:51:09.940Z  WARN 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-11-24T23:51:09.940Z  WARN 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-11-24T23:51:10.593Z  WARN 6907 --- [postulaciones-svc] [           main] [aa15b14003fecd856405858205ca07a4-ad4fba95306dd79e] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<cl.duoc.jv0101.caso02.postulaciones.model.Postulacion> cl.duoc.jv0101.caso02.postulaciones.controller.PostulacionController.crear(cl.duoc.jv0101.caso02.postulaciones.model.Postulacion): [Field error in object 'postulacion' on field 'nombre': rejected value []; codes [NotBlank.postulacion.nombre,NotBlank.nombre,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [postulacion.nombre,nombre]; arguments []; default message [nombre]]; default message [El nombre es obligatorio]] ]
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.50 s -- in cl.duoc.jv0101.caso02.postulaciones.PostulacionControllerTest
+[INFO] Running cl.duoc.jv0101.caso02.postulaciones.PostulacionServiceTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.542 s -- in cl.duoc.jv0101.caso02.postulaciones.PostulacionServiceTest
+[INFO] Running cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberRunnerTest
+2026-11-24T23:51:12.765Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration]: CucumberSpringConfiguration does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-24T23:51:12.776Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration
+2026-11-24T23:51:12.778Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration]: CucumberSpringConfiguration does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-24T23:51:12.780Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v4.0.10)
+
+2026-11-24T23:51:12.861Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.c.CucumberSpringConfiguration  : Starting CucumberSpringConfiguration using Java 21.0.13.1 with PID 6907 (started by codespace in /workspaces/postulaciones-svc)
+2026-11-24T23:51:12.861Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.c.CucumberSpringConfiguration  : No active profile set, falling back to 1 default profile: "default"
+2026-11-24T23:51:13.648Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-24T23:51:13.667Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 1 JPA repository interface.
+2026-11-24T23:51:14.180Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+2026-11-24T23:51:14.275Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-24T23:51:14.277Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-24T23:51:14.556Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1690 ms
+2026-11-24T23:51:14.656Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] i.m.c.instrument.push.PushMeterRegistry  : Publishing metrics for OtlpMeterRegistry every 1m to http://localhost:4318/v1/metrics with resource attributes {service.name=postulaciones-svc}
+2026-11-24T23:51:14.866Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-24T23:51:14.910Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-24T23:51:14.911Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-11-24T23:51:14.916Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:postulacionesdb user=SA
+2026-11-24T23:51:14.917Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-11-24T23:51:14.918Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:postulacionesdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: POSTULACIONESDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-24T23:51:14.994Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists postulaciones cascade
+Hibernate: create table postulaciones (id bigint generated by default as identity, estado varchar(255), nombre varchar(255) not null, oferta varchar(255), primary key (id))
+2026-11-24T23:51:15.008Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-24T23:51:15.127Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page: class path resource [static/index.html]
+2026-11-24T23:51:15.669Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 4 endpoints beneath base path '/actuator'
+2026-11-24T23:51:15.792Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 44141 (http) with context path '/'
+2026-11-24T23:51:15.808Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] c.d.j.c.p.c.CucumberSpringConfiguration  : Started CucumberSpringConfiguration in 3.021 seconds (process running for 33.415)
+2026-11-24T23:51:15.823Z  WARN 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-11-24T23:51:15.824Z  WARN 6907 --- [postulaciones-svc] [           main] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+
+Escenario: el listado del recurso responde 200     # cucumber/postulaciones.feature:5
+2026-11-24T23:51:16.174Z  INFO 6907 --- [postulaciones-svc] [o-auto-1-exec-2] [                                                 ] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-24T23:51:16.175Z  INFO 6907 --- [postulaciones-svc] [o-auto-1-exec-2] [                                                 ] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-24T23:51:16.177Z  INFO 6907 --- [postulaciones-svc] [o-auto-1-exec-2] [                                                 ] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0
+  Dado el servicio "Postulaciones" está disponible # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.servicioDisponible(java.lang.String)
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0
+  Cuando consulto el listado de "postulaciones"    # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.consultarListado(java.lang.String)
+  Entonces el listado responde con código 200      # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.listadoCodigo(int)
+2026-11-24T23:51:16.997Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration]: CucumberSpringConfiguration does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-24T23:51:17.003Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration
+2026-11-24T23:51:17.005Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration]: CucumberSpringConfiguration does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-24T23:51:17.009Z  INFO 6907 --- [postulaciones-svc] [           main] [                                                 ] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration cl.duoc.jv0101.caso02.postulaciones.PostulacionApplication for test class cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberSpringConfiguration
+
+Escenario: ciclo de vida completo del recurso                              # cucumber/postulaciones.feature:10
+Hibernate: insert into postulaciones (estado,nombre,oferta,id) values (?,?,?,default)
+  Dado un nuevo "postulacion" con nombre "hola-cucumber"                   # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.crearRecurso(java.lang.String,java.lang.String)
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+  Cuando consulto el "postulacion" recién creado                           # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.consultarCreado(java.lang.String)
+  Entonces el recurso tiene nombre "hola-cucumber" y código 200            # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.recursoConNombre(java.lang.String,int)
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+Hibernate: update postulaciones set estado=?,nombre=?,oferta=? where id=?
+  Cuando actualizo el "postulacion" con nombre "cucumber-actualizado"      # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.actualizar(java.lang.String,java.lang.String)
+  Entonces el recurso queda con nombre "cucumber-actualizado" y código 200 # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.recursoActualizado(java.lang.String,int)
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+Hibernate: delete from postulaciones where id=?
+  Cuando elimino el "postulacion"                                          # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.eliminar(java.lang.String)
+  Entonces la eliminación responde con código 204                          # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.eliminarCodigo(int)
+Hibernate: select p1_0.id,p1_0.estado,p1_0.nombre,p1_0.oferta from postulaciones p1_0 where p1_0.id=?
+  Y al consultar el "postulacion" eliminado responde 404                   # cl.duoc.jv0101.caso02.postulaciones.cucumber.PostulacionSteps.consultarEliminado(java.lang.String,int)
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.946 s -- in cl.duoc.jv0101.caso02.postulaciones.cucumber.CucumberRunnerTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jacoco:0.8.12:report (report) @ postulaciones-svc ---
+[INFO] Loading execution data file /workspaces/postulaciones-svc/target/jacoco.exec
+[INFO] Analyzed bundle 'Postulaciones | postulaciones' with 4 classes
+[INFO]
+[INFO] --- jar:3.4.2:jar (default-jar) @ postulaciones-svc ---
+[INFO] Building jar: /workspaces/postulaciones-svc/target/postulaciones-svc-1.0.0.jar
+[INFO]
+[INFO] --- spring-boot:4.0.10:repackage (repackage) @ postulaciones-svc ---
+[INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot.txt)
+[INFO] Replacing main artifact /workspaces/postulaciones-svc/target/postulaciones-svc-1.0.0.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /workspaces/postulaciones-svc/target/postulaciones-svc-1.0.0.jar.original
+[INFO]
+[INFO] --- jacoco:0.8.12:check (check) @ postulaciones-svc ---
+[INFO] Loading execution data file /workspaces/postulaciones-svc/target/jacoco.exec
+[INFO] Analyzed bundle 'postulaciones-svc' with 4 classes
+[INFO] All coverage checks have been met.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  52.810 s
+[INFO] Finished at: 2026-11-24T23:51:24Z
+[INFO] ------------------------------------------------------------------------

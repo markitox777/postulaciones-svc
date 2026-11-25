@@ -139,6 +139,9 @@ jobs:
       - name: Verificar centralizacion de logs
         run: bash scripts/verify_logs_k8s.sh
 
+      - name: Verificar trazabilidad con Tempo
+        run: bash scripts/verify_traces_k8s.sh
+
       - name: Obtener evidencias
         if: always()
         run: |

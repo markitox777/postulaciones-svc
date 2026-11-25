@@ -56,7 +56,7 @@ echo "=== DESPLEGANDO MONITOREO ==="
 
 kubectl apply -f k8s/monitoring/
 
-for deployment in ci-metrics-exporter prometheus loki alloy grafana
+for deployment in ci-metrics-exporter prometheus loki alloy tempo grafana
 do
     kubectl rollout status deployment/"$deployment" \
       -n "$NS" --timeout=180s
