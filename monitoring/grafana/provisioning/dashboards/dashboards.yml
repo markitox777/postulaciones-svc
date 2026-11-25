@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: EP3 Postulaciones
+    orgId: 1
+    folder: EP3 - Monitoreo
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

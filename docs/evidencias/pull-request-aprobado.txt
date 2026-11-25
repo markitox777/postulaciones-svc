@@ -1,0 +1,7 @@
+Auditoria de seguridad	pass	2m45s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514919490/job/138871761035
+Auditoria de seguridad	pass	3m27s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514924091/job/138871776960
+Despliegue Kubernetes	pass	4m25s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514919490/job/138873071957
+Despliegue Kubernetes	pass	4m30s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514924091/job/138873421625
+Pruebas, SonarQube y Docker	pass	2m24s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514919253/job/138871760267
+Pruebas, SonarQube y Docker	pass	1m42s	https://github.com/markitox777/postulaciones-svc/actions/runs/45514924067/job/138871776834
+SonarCloud Code Analysis	pass	28s	https://sonarcloud.io/dashboard?id=markitox777_postulaciones-svc&pullRequest=23

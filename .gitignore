@@ -5,4 +5,7 @@ target/
 *.iml
 .vscode/
 .DS_Store
-.env
+.env/monitoring/metrics/ci_metrics.prom
+
+/monitoring/metrics/ci_metrics.prom
+/evidencias/

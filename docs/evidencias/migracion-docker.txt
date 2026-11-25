@@ -1,0 +1,5 @@
+NAME                       IMAGE                                    COMMAND                  SERVICE               CREATED         STATUS          PORTS
+caso02-ci-metrics          prom/node-exporter:v1.9.1                "/bin/node_exporter …"   ci-metrics-exporter   3 hours ago     Up 14 minutes   9100/tcp
+caso02-grafana             grafana/grafana:12.3.0                   "/run.sh"                grafana               3 hours ago     Up 14 minutes   127.0.0.1:3000->3000/tcp
+caso02-postulaciones-svc   duoc/jv0101-caso02-postulaciones:1.0.0   "java -jar app.jar"      postulaciones-svc     2 minutes ago   Up 2 minutes    0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+caso02-prometheus          prom/prometheus:v3.5.0                   "/bin/prometheus --c…"   prometheus            5 hours ago     Up 14 minutes   127.0.0.1:9090->9090/tcp

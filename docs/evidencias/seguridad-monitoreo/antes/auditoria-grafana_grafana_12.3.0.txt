@@ -1,0 +1,125 @@
+
+Report Summary
+
+┌──────────────────────────────────────────────────────────────────────────────────┬──────────┬─────────────────┐
+│                                      Target                                      │   Type   │ Vulnerabilities │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ grafana/grafana:12.3.0 (alpine 3.22.2)                                           │  alpine  │        2        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/azuremonitor/package.json        │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/cloud-monitoring/package.json    │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/grafana-postgresql-datasource/p- │ node-pkg │        0        │
+│ ackage.json                                                                      │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/grafana-pyroscope-datasource/pa- │ node-pkg │        0        │
+│ ckage.json                                                                       │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/grafana-testdata-datasource/pac- │ node-pkg │        0        │
+│ kage.json                                                                        │          │                 │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/graphite/package.json            │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/jaeger/package.json              │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/loki/package.json                │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/mssql/package.json               │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/mysql/package.json               │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/parca/package.json               │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/tempo/package.json               │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/public/app/plugins/datasource/zipkin/package.json              │ node-pkg │        0        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/bin/grafana                                                    │ gobinary │        5        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/bin/grafana-cli                                                │ gobinary │        1        │
+├──────────────────────────────────────────────────────────────────────────────────┼──────────┼─────────────────┤
+│ usr/share/grafana/bin/grafana-server                                             │ gobinary │        1        │
+└──────────────────────────────────────────────────────────────────────────────────┴──────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+For OSS Maintainers: VEX Notice
+--------------------------------
+If you're an OSS maintainer and Trivy has detected vulnerabilities in your project that you believe are not actually exploitable, consider issuing a VEX (Vulnerability Exploitability eXchange) statement.
+VEX allows you to communicate the actual status of vulnerabilities in your project, improving security transparency and reducing false positives for your users.
+Learn more and start using VEX: https://trivy.dev/docs/v0.70/guide/supply-chain/vex/repo#publishing-vex-documents
+
+To disable this notice, set the TRIVY_DISABLE_VEX_NOTICE environment variable.
+
+
+grafana/grafana:12.3.0 (alpine 3.22.2)
+======================================
+Total: 2 (CRITICAL: 2)
+
+┌────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬──────────────────────────────────────────────────────────┐
+│  Library   │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                          Title                           │
+├────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼──────────────────────────────────────────────────────────┤
+│ libcrypto3 │ CVE-2026-31789 │ CRITICAL │ fixed  │ 3.5.4-r0          │ 3.5.6-r0      │ openssl: OpenSSL: Heap buffer overflow on 32-bit systems │
+│            │                │          │        │                   │               │ from large X.509 certificate...                          │
+│            │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2026-31789               │
+├────────────┤                │          │        │                   │               │                                                          │
+│ libssl3    │                │          │        │                   │               │                                                          │
+│            │                │          │        │                   │               │                                                          │
+│            │                │          │        │                   │               │                                                          │
+└────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────┘
+
+usr/share/grafana/bin/grafana (gobinary)
+========================================
+Total: 5 (CRITICAL: 5)
+
+┌───────────────────────────────┬─────────────────────┬──────────┬────────┬───────────────────┬──────────────────────────────┬──────────────────────────────────────────────────────────────┐
+│            Library            │    Vulnerability    │ Severity │ Status │ Installed Version │        Fixed Version         │                            Title                             │
+├───────────────────────────────┼─────────────────────┼──────────┼────────┼───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ github.com/getkin/kin-openapi │ GHSA-r277-6w6q-xmqw │ CRITICAL │ fixed  │ v0.133.0          │ 0.144.0                      │ kin-openapi: ValidationHandler.Load() Fail-Open              │
+│                               │                     │          │        │                   │                              │ Authentication Bypass via NoopAuthenticationFunc Default     │
+│                               │                     │          │        │                   │                              │ https://github.com/advisories/GHSA-r277-6w6q-xmqw            │
+├───────────────────────────────┼─────────────────────┤          │        ├───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ github.com/jackc/pgx/v5       │ CVE-2026-33815      │          │        │ v5.7.6            │ 5.9.0                        │ github.com/jackc/pgx/v5: github.com/jackc/pgx: Memory-safety │
+│                               │                     │          │        │                   │                              │ vulnerability                                                │
+│                               │                     │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2026-33815                   │
+│                               ├─────────────────────┤          │        │                   │                              ├──────────────────────────────────────────────────────────────┤
+│                               │ CVE-2026-33816      │          │        │                   │                              │ github.com/jackc/pgx/v5: github.com/jackc/pgx: Memory-safety │
+│                               │                     │          │        │                   │                              │ vulnerability                                                │
+│                               │                     │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2026-33816                   │
+├───────────────────────────────┼─────────────────────┤          │        ├───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ google.golang.org/grpc        │ CVE-2026-33186      │          │        │ v1.76.0           │ 1.79.3                       │ google.golang.org/grpc/grpc-go:                              │
+│                               │                     │          │        │                   │                              │ google.golang.org/grpc/authz: gRPC-Go: Authorization bypass  │
+│                               │                     │          │        │                   │                              │ due to improper HTTP/2 path validation                       │
+│                               │                     │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2026-33186                   │
+├───────────────────────────────┼─────────────────────┤          │        ├───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ stdlib                        │ CVE-2025-68121      │          │        │ v1.25.3           │ 1.24.13, 1.25.7, 1.26.0-rc.3 │ crypto/tls: crypto/tls: Incorrect certificate validation     │
+│                               │                     │          │        │                   │                              │ during TLS session resumption                                │
+│                               │                     │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2025-68121                   │
+└───────────────────────────────┴─────────────────────┴──────────┴────────┴───────────────────┴──────────────────────────────┴──────────────────────────────────────────────────────────────┘
+
+usr/share/grafana/bin/grafana-cli (gobinary)
+============================================
+Total: 1 (CRITICAL: 1)
+
+┌─────────┬────────────────┬──────────┬────────┬───────────────────┬──────────────────────────────┬──────────────────────────────────────────────────────────┐
+│ Library │ Vulnerability  │ Severity │ Status │ Installed Version │        Fixed Version         │                          Title                           │
+├─────────┼────────────────┼──────────┼────────┼───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────┤
+│ stdlib  │ CVE-2025-68121 │ CRITICAL │ fixed  │ v1.25.3           │ 1.24.13, 1.25.7, 1.26.0-rc.3 │ crypto/tls: crypto/tls: Incorrect certificate validation │
+│         │                │          │        │                   │                              │ during TLS session resumption                            │
+│         │                │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2025-68121               │
+└─────────┴────────────────┴──────────┴────────┴───────────────────┴──────────────────────────────┴──────────────────────────────────────────────────────────┘
+
+usr/share/grafana/bin/grafana-server (gobinary)
+===============================================
+Total: 1 (CRITICAL: 1)
+
+┌─────────┬────────────────┬──────────┬────────┬───────────────────┬──────────────────────────────┬──────────────────────────────────────────────────────────┐
+│ Library │ Vulnerability  │ Severity │ Status │ Installed Version │        Fixed Version         │                          Title                           │
+├─────────┼────────────────┼──────────┼────────┼───────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────┤
+│ stdlib  │ CVE-2025-68121 │ CRITICAL │ fixed  │ v1.25.3           │ 1.24.13, 1.25.7, 1.26.0-rc.3 │ crypto/tls: crypto/tls: Incorrect certificate validation │
+│         │                │          │        │                   │                              │ during TLS session resumption                            │
+│         │                │          │        │                   │                              │ https://avd.aquasec.com/nvd/cve-2025-68121               │
+└─────────┴────────────────┴──────────┴────────┴───────────────────┴──────────────────────────────┴──────────────────────────────────────────────────────────┘

@@ -1,0 +1,17 @@
+# HELP ci_test_coverage_percent Cobertura de pruebas JaCoCo
+# TYPE ci_test_coverage_percent gauge
+ci_test_coverage_percent{type="instruction"} 100.00
+ci_test_coverage_percent{type="branch"} 100.00
+ci_test_coverage_percent{type="line"} 100.00
+ci_test_coverage_percent{type="complexity"} 100.00
+ci_test_coverage_percent{type="method"} 100.00
+ci_test_coverage_percent{type="class"} 100.00
+# HELP ci_metrics_generated_timestamp_seconds Fecha de generacion
+# TYPE ci_metrics_generated_timestamp_seconds gauge
+ci_metrics_generated_timestamp_seconds 1795543106
+# HELP ci_deployment_duration_seconds Duracion del despliegue de prueba
+# TYPE ci_deployment_duration_seconds gauge
+ci_deployment_duration_seconds 58
+# HELP ci_deployment_success Resultado del despliegue
+# TYPE ci_deployment_success gauge
+ci_deployment_success 1

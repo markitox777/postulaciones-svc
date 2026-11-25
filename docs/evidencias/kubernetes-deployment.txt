@@ -1,0 +1,47 @@
+Name:                   postulaciones-svc
+Namespace:              postulaciones
+CreationTimestamp:      Tue, 24 Nov 2026 17:52:51 +0000
+Labels:                 app=postulaciones-svc
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=postulaciones-svc
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:       app=postulaciones-svc
+  Annotations:  kubectl.kubernetes.io/restartedAt: 2026-11-24T17:56:14Z
+  Containers:
+   postulaciones-svc:
+    Image:      duoc/jv0101-caso02-postulaciones:1.0.0
+    Port:       8080/TCP (http)
+    Host Port:  0/TCP (http)
+    Limits:
+      cpu:     750m
+      memory:  768Mi
+    Requests:
+      cpu:      250m
+      memory:   256Mi
+    Liveness:   http-get http://:8080/actuator/health/liveness delay=0s timeout=3s period=10s successThreshold=1 failureThreshold=3
+    Readiness:  http-get http://:8080/actuator/health/readiness delay=0s timeout=3s period=5s successThreshold=1 failureThreshold=3
+    Startup:    http-get http://:8080/actuator/health/liveness delay=0s timeout=1s period=5s successThreshold=1 failureThreshold=30
+    Environment:
+      PORT:                       8080
+      SPRING_H2_CONSOLE_ENABLED:  false
+    Mounts:                       <none>
+  Volumes:                        <none>
+  Node-Selectors:                 <none>
+  Tolerations:                    <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  postulaciones-svc-7495b4b499 (0/0 replicas created)
+NewReplicaSet:   postulaciones-svc-546d67f644 (1/1 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  6m58s  deployment-controller  Scaled up replica set postulaciones-svc-7495b4b499 from 0 to 1
+  Normal  ScalingReplicaSet  3m34s  deployment-controller  Scaled up replica set postulaciones-svc-546d67f644 from 0 to 1
+  Normal  ScalingReplicaSet  3m3s   deployment-controller  Scaled down replica set postulaciones-svc-7495b4b499 from 1 to 0

@@ -1,0 +1,7 @@
+Auditoria de seguridad	fail	1m50s	https://github.com/markitox777/postulaciones-svc/actions/runs/45459305896/job/138677172663	
+Auditoria de seguridad	fail	2m4s	https://github.com/markitox777/postulaciones-svc/actions/runs/45459332483/job/138677258238	
+Pruebas, SonarQube y Docker	fail	1m34s	https://github.com/markitox777/postulaciones-svc/actions/runs/45459332467/job/138677258563	
+SonarCloud Code Analysis	fail	23s	https://sonarcloud.io/dashboard?id=markitox777_postulaciones-svc&pullRequest=23	
+Despliegue Kubernetes	skipping	0	https://github.com/markitox777/postulaciones-svc/actions/runs/45459305896/job/138678397428	
+Despliegue Kubernetes	skipping	0	https://github.com/markitox777/postulaciones-svc/actions/runs/45459332483/job/138678632137	
+Pruebas, SonarQube y Docker	pass	2m0s	https://github.com/markitox777/postulaciones-svc/actions/runs/45459305864/job/138677172685	

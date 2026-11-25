@@ -1,0 +1,26 @@
+NAME                                       READY   STATUS    RESTARTS   AGE
+pod/ci-metrics-exporter-66cdc5cd6d-4xdzl   1/1     Running   0          2m43s
+pod/grafana-8666c69bfb-sj4s8               1/1     Running   0          2m10s
+pod/postulaciones-svc-6947b798d-wmxlw      1/1     Running   0          8m
+pod/prometheus-796466c44d-vr8j5            1/1     Running   0          2m33s
+
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/ci-metrics-exporter   ClusterIP   10.106.67.12     <none>        9100/TCP   2m43s
+service/grafana               ClusterIP   10.110.85.39     <none>        3000/TCP   2m10s
+service/postulaciones-svc     ClusterIP   10.108.143.192   <none>        8080/TCP   3h4m
+service/prometheus            ClusterIP   10.107.110.77    <none>        9090/TCP   6m43s
+
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ci-metrics-exporter   1/1     1            1           2m43s
+deployment.apps/grafana               1/1     1            1           2m10s
+deployment.apps/postulaciones-svc     1/1     1            1           3h4m
+deployment.apps/prometheus            1/1     1            1           6m43s
+
+NAME                                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/ci-metrics-exporter-66cdc5cd6d   1         1         1       2m43s
+replicaset.apps/grafana-8666c69bfb               1         1         1       2m10s
+replicaset.apps/postulaciones-svc-546d67f644     0         0         0       3h1m
+replicaset.apps/postulaciones-svc-6947b798d      1         1         1       8m1s
+replicaset.apps/postulaciones-svc-7495b4b499     0         0         0       3h4m
+replicaset.apps/prometheus-54fc655b6d            0         0         0       6m43s
+replicaset.apps/prometheus-796466c44d            1         1         1       2m33s

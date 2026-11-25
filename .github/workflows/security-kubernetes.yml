@@ -1,0 +1,204 @@
+name: Seguridad y Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/ep3-observabilidad
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    name: Auditoria de seguridad
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Configurar Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Verificar pruebas y cobertura
+        run: mvn -B clean verify
+
+      - name: Construir imagen Docker
+        run: |
+          docker build \
+            -t duoc/jv0101-caso02-postulaciones:1.0.0 .
+
+      - name: Auditar repositorio
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          trivy-config: security/trivy.yml
+          severity: 'CRITICAL'
+          exit-code: '1'
+          format: table
+          output: auditoria-repositorio.txt
+
+      - name: Auditar imagen Docker
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: duoc/jv0101-caso02-postulaciones:1.0.0
+          trivy-config: security/trivy.yml
+          severity: 'CRITICAL'
+          exit-code: '1'
+          format: table
+          output: auditoria-imagen.txt
+
+      - name: Auditar imagenes de monitoreo
+        run: |
+          set -euo pipefail
+          RESULT=0
+
+          while IFS= read -r IMAGE; do
+            NAME=$(echo "$IMAGE" | tr '/:' '__')
+            echo "Auditando $IMAGE"
+
+            trivy image               --scanners vuln               --severity CRITICAL               --exit-code 1               --format table               --output "auditoria-${NAME}.txt"               "$IMAGE" || RESULT=1
+
+          done < <(awk '$1 == "image:" {print $2}' k8s/monitoring/*.yml | sort -u)
+
+          exit "$RESULT"
+
+      - name: Guardar imagen auditada
+        run: |
+          mkdir -p imagen-auditada
+          docker save duoc/jv0101-caso02-postulaciones:1.0.0 | gzip > imagen-auditada/imagen.tar.gz
+          cd imagen-auditada
+          sha256sum imagen.tar.gz > imagen.sha256
+
+      - name: Transferir imagen auditada
+        uses: actions/upload-artifact@v4
+        with:
+          name: imagen-auditada
+          path: imagen-auditada/
+          retention-days: 1
+          compression-level: 0
+
+      - name: Publicar informes de seguridad
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informes-seguridad
+          path: auditoria-*.txt
+
+  deploy:
+    name: Despliegue Kubernetes
+    needs: security
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v5
+
+      - name: Iniciar Minikube
+        uses: medyagh/setup-minikube@e9e035a86bbc3caea26a450bd4dbf9d0c453682e
+        with:
+          driver: docker
+          cpus: 2
+          memory: 3072
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Generar cobertura para monitoreo
+        run: |
+          mvn -B clean verify
+          python3 scripts/generate_ci_metrics.py
+
+      - name: Registrar inicio del despliegue
+        run: echo "DEPLOY_START=$(date +%s)" >> "$GITHUB_ENV"
+
+      - name: Descargar imagen auditada
+        uses: actions/download-artifact@v4
+        with:
+          name: imagen-auditada
+          path: imagen-auditada/
+
+      - name: Verificar integridad de imagen
+        run: |
+          cd imagen-auditada
+          sha256sum -c imagen.sha256
+          gunzip -c imagen.tar.gz | docker load
+
+      - name: Desplegar microservicio
+        run: bash scripts/deploy_k8s.sh --use-audited-image
+
+      - name: Verificar disponibilidad
+        run: |
+          kubectl port-forward \
+            -n postulaciones \
+            svc/postulaciones-svc 8080:8080 \
+            > /tmp/port-forward.log 2>&1 &
+
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/actuator/health; then
+              exit 0
+            fi
+            sleep 3
+          done
+
+          exit 1
+
+      - name: Registrar metricas del despliegue Kubernetes
+        run: |
+          DURATION=$(($(date +%s) - DEPLOY_START))
+
+          {
+            echo "# HELP ci_deployment_duration_seconds Duracion del despliegue Kubernetes"
+            echo "# TYPE ci_deployment_duration_seconds gauge"
+            echo "ci_deployment_duration_seconds $DURATION"
+            echo "# HELP ci_deployment_success Resultado del despliegue"
+            echo "# TYPE ci_deployment_success gauge"
+            echo "ci_deployment_success 1"
+          } >> monitoring/metrics/ci_metrics.prom
+
+      - name: Desplegar monitoreo Kubernetes
+        run: bash scripts/deploy_monitoring_k8s.sh
+
+      - name: Verificar monitoreo Kubernetes
+        run: bash scripts/verify_monitoring_k8s.sh
+
+      - name: Verificar centralizacion de logs
+        run: bash scripts/verify_logs_k8s.sh
+
+      - name: Verificar trazabilidad con Tempo
+        run: bash scripts/verify_traces_k8s.sh
+
+      - name: Obtener evidencias
+        if: always()
+        run: |
+          mkdir -p evidencias
+          kubectl get all -n postulaciones \
+            > evidencias/recursos.txt || true
+          kubectl get nodes -o wide \
+            > evidencias/nodos.txt || true
+          kubectl logs -n postulaciones \
+            deployment/postulaciones-svc \
+            > evidencias/logs.txt || true
+
+      - name: Publicar evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-kubernetes
+          path: evidencias/

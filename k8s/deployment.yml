@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postulaciones-svc
+  namespace: postulaciones
+  labels:
+    app: postulaciones-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postulaciones-svc
+  template:
+    metadata:
+      labels:
+        app: postulaciones-svc
+    spec:
+      containers:
+        - name: postulaciones-svc
+          image: duoc/jv0101-caso02-postulaciones:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: MANAGEMENT_OPENTELEMETRY_TRACING_EXPORT_OTLP_ENDPOINT
+              value: "http://tempo:4318/v1/traces"
+            - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
+              value: "1.0"
+            - name: MANAGEMENT_TRACING_EXPORT_OTLP_ENABLED
+              value: "true"
+            - name: PORT
+              value: "8080"
+            - name: SPRING_H2_CONSOLE_ENABLED
+              value: "false"
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "750m"
+              memory: "768Mi"
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3

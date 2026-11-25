@@ -130,3 +130,88 @@ El revisor debe:
 
 Antes de abrir un Pull Request se debe verificar que las pruebas del proyecto funcionen correctamente.
 
+
+---
+
+## EP3 - DevOps, observabilidad y seguridad
+
+### Componentes implementados
+
+- Monitoreo con Actuator y Micrometer.
+- Prometheus y Grafana.
+- Dashboard de 14 paneles.
+- Integracion de metricas CI/CD.
+- Centralizacion de logs mediante Loki y Alloy.
+- Trazabilidad mediante OpenTelemetry y Tempo.
+- Transferencia de imagen auditada con SHA-256.
+- Orquestacion Kubernetes mediante Minikube.
+- Auditoria automatizada con Trivy.
+- Bloqueo automatico ante vulnerabilidades criticas.
+
+### Documentacion EP3
+
+- [Observabilidad](docs/06_Observabilidad_EP3.md)
+- [Kubernetes](docs/07_Kubernetes_EP3.md)
+- [Seguridad y CI/CD](docs/08_Seguridad_CICD_EP3.md)
+- [Evidencias tecnicas](docs/evidencias/)
+
+### Ejecutar monitoreo
+
+    docker compose up --build -d
+
+Servicios:
+
+| Servicio | Puerto |
+|---|---|
+| Microservicio | 8080 |
+| Prometheus | 9090 |
+| Grafana | 3000 |
+
+### Estado de seguridad
+
+La auditoria automatica se encuentra activa.
+
+### Resultados verificados
+
+- Spring Boot 4.0.10.
+- Spring WebMVC 7.0.11.
+- 20 pruebas automatizadas aprobadas.
+- Cobertura JaCoCo del 100%.
+- Cero vulnerabilidades criticas detectadas por Trivy.
+- Auditoria del repositorio e imagen Docker aprobadas.
+- Quality Gate de SonarCloud aprobado.
+- Despliegue automatico Kubernetes exitoso.
+- Siete pods operativos sin reinicios observados.
+- 45 segundos de despliegue del microservicio.
+- 20 trazas recuperadas.
+- Auditoria de las seis imagenes de monitoreo aprobada.
+
+Las politicas de seguridad permanecen activas y bloquean
+el despliegue cuando se detectan vulnerabilidades criticas.
+
+El despliegue Kubernetes se realiza en un entorno
+temporal de GitHub Actions mediante Minikube.
+
+### Evidencias finales
+
+- [Pipeline de seguridad](https://github.com/markitox777/postulaciones-svc/actions/runs/45518995718)
+- [Pull Request EP3](https://github.com/markitox777/postulaciones-svc/pull/23)
+- [Auditoria del repositorio](docs/evidencias/final/seguridad/auditoria-repositorio.txt)
+- [Auditoria de imagen Docker](docs/evidencias/final/seguridad/auditoria-imagen.txt)
+
+
+### Evidencias de observabilidad y Kubernetes
+
+- [Evidencias finales](docs/evidencias/final/)
+- [Recursos Kubernetes](docs/evidencias/final/kubernetes/recursos.txt)
+- [Cobertura](docs/evidencias/final/kubernetes/cobertura.json)
+- [Duracion del despliegue](docs/evidencias/final/kubernetes/duracion-despliegue.json)
+- [Logs centralizados](docs/evidencias/final/kubernetes/loki-logs.json)
+- [Trazabilidad](docs/evidencias/final/kubernetes/tempo-trazas.json)
+- [Auditorias de seguridad](docs/evidencias/final/seguridad/)
+
+La validacion integral corresponde a la ejecucion
+45518995718 del Pull Request 23.
+
+Los resultados de seguridad corresponden al alcance
+CRITICAL configurado en Trivy.
