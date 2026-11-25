@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Descargar codigo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Configurar Java
         uses: actions/setup-java@v5
@@ -104,7 +104,7 @@ jobs:
 
     steps:
       - name: Descargar codigo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Iniciar Minikube
         uses: medyagh/setup-minikube@e9e035a86bbc3caea26a450bd4dbf9d0c453682e
