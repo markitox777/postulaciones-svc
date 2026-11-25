@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: node-exporter
-          image: prom/node-exporter:v1.9.1
+          image: prom/node-exporter:v1.13.1
           args:
             - "--collector.disable-defaults"
             - "--collector.textfile"

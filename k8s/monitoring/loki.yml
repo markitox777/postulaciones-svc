@@ -55,7 +55,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: loki
-          image: grafana/loki:3.5.0
+          image: grafana/loki:3.7.10
           args:
             - "-config.file=/etc/loki/loki.yml"
           ports:

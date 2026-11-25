@@ -51,7 +51,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: tempo
-          image: grafana/tempo:2.8.2
+          image: grafana/tempo:3.1.1
           args:
             - "-config.file=/etc/tempo/tempo.yml"
           ports:
